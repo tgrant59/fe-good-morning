@@ -1,5 +1,10 @@
 # fe-good-morning
 The Frontend for Good Morning Tophat
+https://good-morning.tophat.com/
+
+###
+For the backend service see:
+https://github.com/jakebolam/good-morning-service (https://good-morning-service.tophat.com/)
 
 ## Getting Started
 
