@@ -1,0 +1,7 @@
+.storybook/
+.circleci/
+artifacts/
+internals/
+server/
+docs/
+node_modules/

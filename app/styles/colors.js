@@ -1,0 +1,22 @@
+export default {
+    basic: {
+        AQUA: '#7fdbff',
+        BLACK: '#111111',
+        BLUE: '#0074d9',
+        FUCHSIA: '#f012be',
+        GRAY: '#aaaaaa',
+        GRAY_LIGHT: '#ced6db',
+        GREEN: '#2ecc40',
+        LIME: '#01ff70',
+        MAROON: '#85144b',
+        NAVY: '#001f3f',
+        OLIVE: '#3d9970',
+        ORANGE: '#ff851b',
+        PURPLE: '#b10dc9',
+        RED: '#ff4136',
+        SILVER: '#dddddd',
+        TEAL: '#39cccc',
+        WHITE: '#FFFFFF',
+        YELLOW: '#ffdc00',
+    },
+}
