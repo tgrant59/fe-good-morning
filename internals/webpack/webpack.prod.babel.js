@@ -3,11 +3,6 @@ const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-const publicPath =
-  process.env.BUILD_FOR_PRODUCTION === 'true'
-    ? 'https://fe-marketplace-production.s3.amazonaws.com/'
-    : '/'
-
 module.exports = require('./webpack.base.babel')({
   // In production, we skip all hot-reloading stuff
   entry: [
@@ -18,7 +13,7 @@ module.exports = require('./webpack.base.babel')({
   output: {
     filename: '[name].[chunkhash].js',
     chunkFilename: '[name].[chunkhash].chunk.js',
-    publicPath: publicPath,
+    publicPath: '/',
   },
 
   plugins: [

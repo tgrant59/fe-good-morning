@@ -65,13 +65,9 @@ jobs:
          name: Install Deployment Dependencies
          command: make install-deployment-deps
 
-      - run:
-          name: Deploy Staging
-          command: make deploy-staging
-
-      - run:
-          name: Build Production App
-          command: BUILD_FOR_PRODUCTION=true make build
+#      - run:
+#          name: Deploy Staging
+#          command: make deploy-staging
 
       - run:
           name: Deploy Production
