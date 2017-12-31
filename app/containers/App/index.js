@@ -3,6 +3,7 @@ import { Helmet } from 'react-helmet'
 import { Switch, Route } from 'react-router-dom'
 import styled from 'styled-components'
 
+import HomePage from 'containers/HomePage/Loadable'
 import LogErrors from 'containers/LogErrors'
 import NotFoundPage from 'containers/NotFoundPage/Loadable'
 import routes from 'routes'
@@ -33,11 +34,7 @@ export function App() {
             </Helmet>
             <LogErrors boundaryName="routes">
                 <Switch>
-                    <Route
-                        exact
-                        path={routes.HOMEPAGE}
-                        component={NotFoundPage}
-                    />
+                    <Route exact path={routes.HOMEPAGE} component={HomePage} />
                     <Route component={NotFoundPage} />
                 </Switch>
             </LogErrors>

@@ -111,6 +111,8 @@
         "redux-saga": "0.15.3",
         "reselect": "3.0.1",
         "sanitize.css": "4.1.0",
+        "semantic-ui-css": "^2.2.12",
+        "semantic-ui-react": "^0.77.1",
         "styled-components": "^2.2.1",
         "warning": "3.0.0",
         "whatwg-fetch": "2.0.3"
