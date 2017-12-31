@@ -7,10 +7,9 @@ import { ConnectedRouter } from 'react-router-redux'
 import createHistory from 'history/createBrowserHistory'
 import 'sanitize.css/sanitize.css'
 
-import '!file-loader?name=[name].[ext]!./assets/favicon.ico'  // eslint-disable-line
+// import '!file-loader?name=[name].[ext]!./assets/favicon.ico'  // eslint-disable-line
 
 import App from 'containers/App'
-
 import './styles/global-styles'
 import configureStore from './utils/configureStore'
 import './utils/fontLoaders'

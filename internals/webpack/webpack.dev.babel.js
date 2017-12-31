@@ -14,9 +14,6 @@ const pkg = require(path.resolve(process.cwd(), 'package.json'));
 const dllPlugin = pkg.dllPlugin;
 
 const plugins = [
-  new webpack.DefinePlugin({
-    __MPS_API_KEY__: "'623ce1b8-5d16-470e-ab31-2eeb6104131b'",
-  }),
   new webpack.HotModuleReplacementPlugin(), // Tell webpack we want hot reloading
   new webpack.NoEmitOnErrorsPlugin(),
   new HtmlWebpackPlugin({
@@ -79,14 +76,14 @@ function dependencyHandlers() {
   // Don't do anything during the DLL Build step
   if (process.env.BUILDING_DLL) { return []; }
 
-  const dllPath = path.resolve(process.cwd(), dllPlugin.path || 'node_modules/fe-marketplace-dlls');
+  const dllPath = path.resolve(process.cwd(), dllPlugin.path || 'node_modules/fe-good-morning-dlls');
 
   /**
    * If DLLs aren't explicitly defined, we assume all production dependencies listed in package.json
    * Reminder: You need to exclude any server side dependencies by listing them in dllConfig.exclude
    */
   if (!dllPlugin.dlls) {
-    const manifestPath = path.resolve(dllPath, 'feMarketplaceDeps.json');
+    const manifestPath = path.resolve(dllPath, 'feGoodMorningDeps.json');
 
     if (!fs.existsSync(manifestPath)) {
       logger.error('The DLL manifest is missing. Please run `make install`');
