@@ -1,4 +1,6 @@
 export default {
-    HOMEPAGE: '/',
+    BASE: '/',
+    LOGIN: '/',
+    ORDERS: '/orders',
     NOT_FOUND: '/404',
 }

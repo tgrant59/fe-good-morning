@@ -9,8 +9,6 @@ const Container = styled.div`
     width: 100%;
 `
 
-export function HomePage() {
-    return <Container>Hello, World!</Container>
-}
+const HomePage = () => <Container>Hello, World!</Container>
 
 export default HomePage
