@@ -9,6 +9,6 @@ const Container = styled.div`
     width: 100%;
 `
 
-const HomePage = () => <Container>Hello, World!</Container>
+const Orders = () => <Container>Hello, World!</Container>
 
-export default HomePage
+export default Orders

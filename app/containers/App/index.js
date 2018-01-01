@@ -3,9 +3,9 @@ import { Helmet } from 'react-helmet'
 import { Switch, Route } from 'react-router-dom'
 import styled from 'styled-components'
 
-import Orders from 'containers/Orders/Loadable'
 import LogErrors from 'containers/LogErrors'
 import Login from 'containers/Login/Loadable'
+import LoggedInView from 'containers/LoggedInView'
 import NotFoundPage from 'containers/NotFoundPage/Loadable'
 import routes from 'routes'
 import { DAEMON } from 'utils/constants'
@@ -20,13 +20,6 @@ const AppWrapper = styled.div`
     position: fixed;
     width: 100%;
 `
-
-// TODO: Put app navbar here
-export const LoggedInView = () => (
-    <Switch>
-        <Route exact path={routes.ORDERS} component={Orders} />
-    </Switch>
-)
 
 export function App() {
     return (
