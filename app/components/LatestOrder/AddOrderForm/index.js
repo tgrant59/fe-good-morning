@@ -67,6 +67,7 @@ class AddOrderForm extends React.Component {
     }
 
     getDefaultSelectedOptions(selectedItem) {
+        if (!selectedItem) return {}
         const selectedOptions = {}
         selectedItem.get('options').forEach(option => {
             if (!option.get('allowMultiple')) {
@@ -141,7 +142,7 @@ class AddOrderForm extends React.Component {
     }
 
     getOption = option => (
-        <AddOptionSection>
+        <AddOptionSection key={option.get('name')}>
             <AddOptionHeader>{option.get('name')}</AddOptionHeader>
             {option.get('allowMultiple')
                 ? this.getOptionMultiOptions(option)

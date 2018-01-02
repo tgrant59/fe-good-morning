@@ -31,8 +31,8 @@ const getOrderedItemOptionSection = optionSection => (
     </OrderItemOptionSection>
 )
 
-const getOrderedItem = orderedItem => (
-    <OrderCard key={orderedItem.getIn(['details', 'ownerId'])}>
+const getOrderedItem = (orderedItem, index) => (
+    <OrderCard key={index}>
         <OrderCardHeader>
             <OrderImg src={orderedItem.getIn(['owner', 'picture'])} />
             <OrderText>
