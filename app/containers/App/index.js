@@ -4,7 +4,7 @@ import { Switch, Route } from 'react-router-dom'
 import styled from 'styled-components'
 
 import LogErrors from 'containers/LogErrors'
-import Login from 'containers/Login/Loadable'
+import Login from 'containers/LoginPage/Loadable'
 import LoggedInView from 'containers/LoggedInView'
 import NotFoundPage from 'containers/NotFoundPage/Loadable'
 import routes from 'routes'

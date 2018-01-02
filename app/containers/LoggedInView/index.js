@@ -6,14 +6,17 @@ import { push } from 'react-router-redux'
 import styled from 'styled-components'
 
 import NavBar from 'components/NavBar'
-import Orders from 'containers/Orders/Loadable'
+import Orders from 'containers/OrdersPage/Loadable'
 import routes from 'routes'
+import { colors } from '../../styles'
 
 const Container = styled.div`
     height: 100%;
+    overflow-y: auto;
 `
 const MainContainer = styled.div`
-    height: calc(100% - 60px);
+    background-color: ${colors.basic.SILVER};
+    min-height: calc(100% - 60px);
     position: relative;
 `
 

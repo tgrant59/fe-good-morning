@@ -9,8 +9,8 @@ import LoginPanel from 'components/LoginPanel'
 import routes from 'routes'
 import injectReducer from 'utils/injectReducer'
 
-import { loginSuccess, loginFailure } from './Login.actions'
-import reducer from './Login.reducer'
+import { loginSuccess, loginFailure } from '../../ducks/Login/Login.actions'
+import reducer from '../../ducks/Login/Login.reducer'
 
 const PageContainer = styled.div`
     height: 100%;
