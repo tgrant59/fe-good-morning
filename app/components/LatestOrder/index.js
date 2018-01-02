@@ -133,7 +133,7 @@ const LatestOrder = ({ addOrder, hasOrdered, isOrdering, items, order }) => {
 }
 
 LatestOrder.propTypes = {
-    addOrder: PropTypes.object,
+    addOrder: PropTypes.func.isRequired,
     hasOrdered: PropTypes.bool,
     isOrdering: PropTypes.bool,
     items: PropTypes.object,

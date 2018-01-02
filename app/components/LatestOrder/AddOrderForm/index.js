@@ -1,7 +1,13 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 
-import { AddCard, AddOptionHeader, AddButton } from './AddOrderForm.styles'
+import {
+    AddCard,
+    AddOptionHeader,
+    AddOptionSection,
+    AddOptionSections,
+    AddButton,
+} from './AddOrderForm.styles'
 
 class AddOrderForm extends React.Component {
     static propTypes = {
@@ -135,12 +141,12 @@ class AddOrderForm extends React.Component {
     }
 
     getOption = option => (
-        <div>
+        <AddOptionSection>
             <AddOptionHeader>{option.get('name')}</AddOptionHeader>
             {option.get('allowMultiple')
                 ? this.getOptionMultiOptions(option)
                 : this.getOptionSingleOption(option)}
-        </div>
+        </AddOptionSection>
     )
 
     getItemSelectOption = (item, index) => (
@@ -151,9 +157,18 @@ class AddOrderForm extends React.Component {
 
     render() {
         if (this.state.selectedItemIndex === null) return null
-        if (this.props.isOrdering) return <AddCard>Ordering...</AddCard>
+        if (this.props.isOrdering)
+            return (
+                <AddCard>
+                    <h2>Ordering...</h2>
+                </AddCard>
+            )
         if (this.props.hasOrdered)
-            return <AddCard>Your Order has been submitted!</AddCard>
+            return (
+                <AddCard>
+                    <h2>Your Order has been submitted!</h2>
+                </AddCard>
+            )
         return (
             <AddCard>
                 <h2>Create your Order</h2>
@@ -165,7 +180,11 @@ class AddOrderForm extends React.Component {
                     >
                         {this.props.items.map(this.getItemSelectOption)}
                     </select>
-                    {this.state.selectedItem.get('options').map(this.getOption)}
+                    <AddOptionSections>
+                        {this.state.selectedItem
+                            .get('options')
+                            .map(this.getOption)}
+                    </AddOptionSections>
                     <AddButton type="submit">Place Order</AddButton>
                 </form>
             </AddCard>

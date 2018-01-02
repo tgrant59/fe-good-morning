@@ -46,11 +46,17 @@ const UserNavItem = styled.div`
     }
 `
 const LogoNavItem = styled.div`
-    flex: 1;
+    flex: 0 1;
     height: 60px;
     font-size: 17px;
     line-height: 60px;
     padding: 0 20px;
+    white-space: nowrap;
+`
+const LogoNavText = styled.span`
+    @media (max-width: 600px) {
+        display: none;
+    }
 `
 const IMG = styled.img`
     border-radius: 20px;
@@ -63,13 +69,22 @@ const Name = styled.div`
     height: 60px;
     line-height: 60px;
     white-space: nowrap;
+
+    @media (max-width: 600px) {
+        display: none;
+    }
 `
 
 const NavBar = ({ user }) => (
     <Container>
         <LogoNavItem>
-            <i className="fas fa-utensils fa-lg" />&nbsp; Good Morning, TopHat!
-            🍌
+            <i className="fas fa-utensils fa-lg" />
+            <LogoNavText>
+                &nbsp; Good Morning, TopHat!
+                <span role="img" aria-label="banana emoji">
+                    🍌
+                </span>
+            </LogoNavText>
         </LogoNavItem>
         <Spacer />
         <NavItem to={routes.ORDERS}>Orders</NavItem>
