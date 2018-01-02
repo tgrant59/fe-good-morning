@@ -13,7 +13,7 @@ import { selectItems } from 'ducks/Items/Items.selectors'
 import { addOrder, loadLatestOrder } from 'ducks/Orders/Orders.actions'
 import ordersReducer from 'ducks/Orders/Orders.reducer'
 import ordersSaga from 'ducks/Orders/Orders.saga'
-import { selectOrder, selectOrderState } from 'ducks/Orders/Orders.selectors'
+import { selectOrder } from 'ducks/Orders/Orders.selectors'
 import usersReducer from 'ducks/Users/Users.reducer'
 import usersSaga from 'ducks/Users/Users.saga'
 import injectReducer from 'utils/injectReducer'
@@ -65,8 +65,6 @@ export class Orders extends React.PureComponent {
 
 const mapStateToProps = state => ({
     order: selectOrder(state),
-    hasOrdered: selectOrderState(state).get('hasOrdered'),
-    isOrdering: selectOrderState(state).get('isOrdering'),
     items: selectItems(state),
 })
 

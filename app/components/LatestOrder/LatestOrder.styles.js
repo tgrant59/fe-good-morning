@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { keyframes } from 'styled-components'
 
 import { colors, typography } from 'styles'
 
@@ -20,6 +20,44 @@ const CardHeader = styled.div`
     position: relative;
 `
 
+const wiggleAnimation = keyframes`
+    0% {
+        transform: rotate(3deg);
+    }
+
+    50% {
+        transform: rotate(-3deg);
+    }
+
+    100% {
+        transform: rotate(3deg);
+    }
+`
+const Button = styled.div`
+    display: flex;
+    margin: 10px;
+    padding: 12px;
+    cursor: pointer;
+    user-select: none;
+    transition: all 150ms linear;
+    text-align: center;
+    white-space: nowrap;
+    text-transform: uppercase;
+    color: #fff;
+    border: 0 none;
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1.3;
+    background-color: #416dea;
+    box-shadow: 2px 5px 10px #e4e4e4;
+    animation: 1s ${wiggleAnimation} ease-out infinite;
+
+    &:hover {
+        transition: all 150ms linear;
+        opacity: 0.85;
+    }
+`
+
 export const HostingCard = Card.extend`
     max-width: 80%;
     z-index: 200;
@@ -37,11 +75,19 @@ export const HostImg = styled.img`
     position: absolute;
     left: 0;
 `
-export const HostText = styled.span`
+export const HostTextContainer = styled.span`
     flex: 1;
     font-size: 20px;
     margin-left: 80px;
 `
+export const HostText = styled.div`
+    font-size: 20px;
+`
+export const HostSubText = styled.div`
+    font-size: 13px;
+    margin-top: 4px;
+`
+export const HostButton = Button
 
 export const OrderCard = Card.extend`
     max-width: calc(80% - 20px);
