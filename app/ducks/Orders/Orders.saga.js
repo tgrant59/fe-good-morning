@@ -4,10 +4,16 @@ import { selectToken } from 'ducks/Login/Login.selectors'
 import { loadUsers } from 'ducks/Users/Users.actions'
 import backend from 'helpers/backend'
 
+import { selectOrder } from './Orders.selectors'
+
 import {
     LOAD_LATEST_ORDER_REQUESTED,
+    ADD_ORDER_REQUESTED,
+    loadLatestOrder,
     loadLatestOrderSuccess,
     loadLatestOrderFailure,
+    addOrderSuccess,
+    addOrderFailure,
 } from './Orders.actions'
 
 export function* getLatestOrder() {
@@ -29,6 +35,46 @@ export function* getLatestOrder() {
     }
 }
 
-export default function* contentItemPackPreviewSagaWatcher() {
+export function* addOrder(action) {
+    const token = yield select(selectToken)
+    const order = yield select(selectOrder)
+    const requestURL = `/orders/${order.get('id')}`
+
+    const orderData = action.payload.orderData
+    const options = Object.keys(orderData.selectedOptions).map(option => {
+        let suboptions
+        if (typeof orderData.selectedOptions[option] === 'string') {
+            suboptions = [orderData.selectedOptions[option]]
+        } else {
+            suboptions = [...orderData.selectedOptions[option]]
+        }
+        return {
+            name: option,
+            options: suboptions,
+        }
+    })
+
+    const body = JSON.stringify({
+        item: {
+            name: orderData.selectedItem.get('name'),
+            options,
+        },
+    })
+
+    try {
+        const response = yield call(backend.post, requestURL, token, { body })
+        if (response.status >= 400) {
+            yield put(addOrderFailure(response.data))
+        } else {
+            yield put(addOrderSuccess(response.data))
+            yield put(loadLatestOrder())
+        }
+    } catch (error) {
+        yield put(addOrderFailure(error))
+    }
+}
+
+export default function* orderSagaWatcher() {
     yield takeLatest(LOAD_LATEST_ORDER_REQUESTED, getLatestOrder)
+    yield takeLatest(ADD_ORDER_REQUESTED, addOrder)
 }

@@ -2,12 +2,17 @@ import styled from 'styled-components'
 
 import { colors, typography } from 'styles'
 
-const Card = styled.div`
+export const LatestOrderContainer = styled.div`
+    text-align: center;
+`
+
+export const Card = styled.div`
     background-color: ${colors.basic.WHITE};
     box-shadow: rgba(0, 0, 0, 0.117647) 0 1px 6px,
         rgba(0, 0, 0, 0.117647) 0 1px 4px;
     padding: 20px;
     margin: 0 auto 6px;
+    text-align: left;
 `
 const CardHeader = styled.div`
     align-items: center;
@@ -65,10 +70,16 @@ export const OrderItemName = styled.p`
     margin: 0 0 5px 60px;
     text-decoration: underline;
 `
+export const OrderItemOptions = styled.div`
+    margin-left: 60px;
+
+    @media (min-width: 800px) {
+        display: flex;
+    }
+`
 export const OrderItemOptionSection = styled.div`
     font-size: 16px;
     font-weight: ${typography.fontWeights.BOLD};
-    margin-left: 60px;
 
     p {
         margin: 0;
@@ -80,5 +91,10 @@ export const OrderItemOptionSection = styled.div`
 
     li {
         font-weight: ${typography.fontWeights.NORMAL};
+    }
+
+    @media (min-width: 800px) {
+        flex: 0 1;
+        margin: 0 20px;
     }
 `

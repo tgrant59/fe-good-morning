@@ -1,6 +1,6 @@
 import { requestGenerator } from 'helpers/request'
 
-const API_URL = 'https://ed61tixexb.execute-api.us-east-1.amazonaws.com/prod/'
+const API_URL = 'https://ed61tixexb.execute-api.us-east-1.amazonaws.com/prod'
 
 const backendRequestGenerator = method => {
     const methodRequest = requestGenerator(method)

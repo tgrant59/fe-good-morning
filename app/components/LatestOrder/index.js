@@ -1,7 +1,9 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 
+import AddOrderForm from './AddOrderForm'
 import {
+    LatestOrderContainer,
     HostingCard,
     HostingCardHeader,
     HostImg,
@@ -11,6 +13,7 @@ import {
     OrderImg,
     OrderText,
     OrderItemName,
+    OrderItemOptions,
     OrderItemOptionSection,
 } from './LatestOrder.styles'
 
@@ -26,7 +29,7 @@ const getOrderedItemOptionSection = optionSection => (
 )
 
 const getOrderedItem = orderedItem => (
-    <OrderCard key={orderedItem.getIn(['owner', 'name'])}>
+    <OrderCard key={orderedItem.getIn(['details', 'ownerId'])}>
         <OrderCardHeader>
             <OrderImg src={orderedItem.getIn(['owner', 'picture'])} />
             <OrderText>
@@ -34,14 +37,16 @@ const getOrderedItem = orderedItem => (
             </OrderText>
         </OrderCardHeader>
         <OrderItemName>{orderedItem.get('name')}</OrderItemName>
-        {orderedItem.get('options').map(getOrderedItemOptionSection)}
+        <OrderItemOptions>
+            {orderedItem.get('options').map(getOrderedItemOptionSection)}
+        </OrderItemOptions>
     </OrderCard>
 )
 
-const LatestOrder = ({ order }) => {
+const LatestOrder = ({ addOrder, hasOrdered, isOrdering, items, order }) => {
     if (!order) return <div>Loading</div>
     return (
-        <div>
+        <LatestOrderContainer>
             <HostingCard key="host">
                 <HostingCardHeader>
                     <HostImg src={order.getIn(['host', 'picture'])} />
@@ -51,12 +56,28 @@ const LatestOrder = ({ order }) => {
                 </HostingCardHeader>
             </HostingCard>
             {order.get('orderedItems').map(getOrderedItem)}
-        </div>
+            <h1>Add to Order</h1>
+            <AddOrderForm
+                hasOrdered={hasOrdered}
+                isOrdering={isOrdering}
+                addOrder={addOrder}
+                items={items}
+            />
+        </LatestOrderContainer>
     )
 }
 
 LatestOrder.propTypes = {
+    addOrder: PropTypes.object,
+    hasOrdered: PropTypes.bool,
+    isOrdering: PropTypes.bool,
+    items: PropTypes.object,
     order: PropTypes.object,
+}
+
+LatestOrder.defaultProps = {
+    hasOrdered: false,
+    isOrdering: false,
 }
 
 export default LatestOrder
