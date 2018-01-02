@@ -5,7 +5,7 @@ The Frontend for Good Morning Tophat
 ###
 For the backend service see:
 - https://github.com/jakebolam/good-morning-service 
-- (https://zglnyyfcah.execute-api.us-east-1.amazonaws.com/prod)
+- (https://ed61tixexb.execute-api.us-east-1.amazonaws.com/prod/)
 
 ## Getting Started
 
