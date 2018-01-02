@@ -1,21 +1,24 @@
 import { fromJS } from 'immutable'
 
 import {
-    LOAD_LATEST_ORDER_FAILURE,
-    LOAD_LATEST_ORDER_SUCCESS,
     LOAD_LATEST_ORDER_REQUESTED,
+    LOAD_LATEST_ORDER_SUCCESS,
+    LOAD_LATEST_ORDER_FAILURE,
     ADD_ORDER_REQUESTED,
-    ADD_ORDER_FAILURE,
     ADD_ORDER_SUCCESS,
+    ADD_ORDER_FAILURE,
+    DELETE_ORDER_REQUESTED,
+    DELETE_ORDER_SUCCESS,
+    DELETE_ORDER_FAILURE,
 } from './Orders.actions'
 
 export const initialState = fromJS({
     latestOrder: null,
     loadingOrder: true,
     loadOrderError: false,
-    submittingOrder: false,
-    orderSubmitted: false,
     orderError: false,
+    orderSubmitted: false,
+    submittingOrder: false,
 })
 
 const loginReducer = (state = initialState, action) => {
@@ -52,6 +55,12 @@ const loginReducer = (state = initialState, action) => {
                 submittingOrder: false,
                 orderError: true,
             })
+        case DELETE_ORDER_REQUESTED:
+            return state
+        case DELETE_ORDER_SUCCESS:
+            return state
+        case DELETE_ORDER_FAILURE:
+            return state
         default:
             return state
     }

@@ -9,11 +9,14 @@ import { selectOrder } from './Orders.selectors'
 import {
     LOAD_LATEST_ORDER_REQUESTED,
     ADD_ORDER_REQUESTED,
+    DELETE_ORDER_REQUESTED,
+    addOrderSuccess,
+    addOrderFailure,
+    deleteOrderSuccess,
+    deleteOrderFailure,
     loadLatestOrder,
     loadLatestOrderSuccess,
     loadLatestOrderFailure,
-    addOrderSuccess,
-    addOrderFailure,
 } from './Orders.actions'
 
 export function* getLatestOrder() {
@@ -74,7 +77,26 @@ export function* addOrder(action) {
     }
 }
 
+export function* deleteOrder(action) {
+    const token = yield select(selectToken)
+    const order = yield select(selectOrder)
+    const requestURL = `/orders/${order.get('id')}/${action.payload.orderId}`
+
+    try {
+        const response = yield call(backend.delete, requestURL, token)
+        if (response.status >= 400) {
+            yield put(deleteOrderFailure(response.data))
+        } else {
+            yield put(deleteOrderSuccess())
+            yield put(loadLatestOrder())
+        }
+    } catch (error) {
+        yield put(deleteOrderFailure(error))
+    }
+}
+
 export default function* orderSagaWatcher() {
     yield takeLatest(LOAD_LATEST_ORDER_REQUESTED, getLatestOrder)
     yield takeLatest(ADD_ORDER_REQUESTED, addOrder)
+    yield takeLatest(DELETE_ORDER_REQUESTED, deleteOrder)
 }
