@@ -31,12 +31,16 @@ class LoginPanel extends React.PureComponent {
     render() {
         return (
             <LoginPanelContainer>
-                <LoginTitle>Good Morning, Tophat!</LoginTitle>
+                <LoginTitle>
+                    <i className="fas fa-utensils fa-lg" />&nbsp; Good Morning,
+                    TopHat! 🍌
+                </LoginTitle>
                 <GoogleLogin
                     clientId="979241073886-66fsr3mmbnsi2bvfs6n8d380nh1o4tpd.apps.googleusercontent.com"
                     buttonText="Login"
                     onSuccess={this.props.onGoogleSuccess}
                     onFailure={this.props.onGoogleFail}
+                    isSignedIn={true}
                 />
                 {this.props.isErrored ? getErrorMessage() : null}
             </LoginPanelContainer>

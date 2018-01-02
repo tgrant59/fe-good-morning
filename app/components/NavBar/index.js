@@ -45,6 +45,13 @@ const UserNavItem = styled.div`
         padding: 0 10px;
     }
 `
+const LogoNavItem = styled.div`
+    flex: 1;
+    height: 60px;
+    font-size: 17px;
+    line-height: 60px;
+    padding: 0 20px;
+`
 const IMG = styled.img`
     border-radius: 20px;
     flex: 0 1;
@@ -60,6 +67,10 @@ const Name = styled.div`
 
 const NavBar = ({ user }) => (
     <Container>
+        <LogoNavItem>
+            <i className="fas fa-utensils fa-lg" />&nbsp; Good Morning, TopHat!
+            🍌
+        </LogoNavItem>
         <Spacer />
         <NavItem to={routes.ORDERS}>Orders</NavItem>
         <NavItem to={routes.ORDERS}>Ledger</NavItem>
