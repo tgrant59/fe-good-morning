@@ -17,7 +17,15 @@ const Container = styled.div`
 const MainContainer = styled.div`
     background-color: ${colors.basic.SILVER};
     min-height: calc(100% - 60px);
+    padding-bottom: 20px;
     position: relative;
+`
+const Footer = styled.div`
+    background-color: ${colors.basic.ORANGE};
+    bottom: 0;
+    height: 20px;
+    position: absolute;
+    width: 100%;
 `
 
 export class LoggedInView extends React.PureComponent {
@@ -42,6 +50,7 @@ export class LoggedInView extends React.PureComponent {
                     <Switch>
                         <Route exact path={routes.ORDERS} component={Orders} />
                     </Switch>
+                    <Footer />
                 </MainContainer>
             </Container>
         )
