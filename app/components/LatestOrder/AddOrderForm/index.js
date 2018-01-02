@@ -23,11 +23,24 @@ class AddOrderForm extends React.Component {
     }
 
     state = {
-        selectedItem: this.props.items.get(0),
-        selectedItemIndex: 0,
-        selectedOptions: this.getDefaultSelectedOptions(
-            this.props.items.get(0),
-        ),
+        selectedItem: null,
+        selectedItemIndex: null,
+        selectedOptions: {},
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (
+            this.props.items &&
+            (!this.state.selectedItem || this.props.items !== nextProps.items)
+        ) {
+            this.setState({
+                selectedItem: nextProps.items.get(0),
+                selectedItemIndex: 0,
+                selectedOptions: this.getDefaultSelectedOptions(
+                    nextProps.items.get(0),
+                ),
+            })
+        }
     }
 
     onItemSelect = event => {
