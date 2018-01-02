@@ -22,8 +22,9 @@ export const AddButton = styled.button`
     color: ${colors.basic.WHITE};
     cursor: pointer;
     font-size: 18px;
-    padding: 10px 30px;
     margin-top: 20px;
+    padding: 10px 30px;
+    transition: all 0.2s;
     width: 100%;
 
     &:hover {
