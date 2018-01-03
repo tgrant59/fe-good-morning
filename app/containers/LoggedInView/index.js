@@ -15,13 +15,14 @@ const Container = styled.div`
     overflow-y: auto;
 `
 const MainContainer = styled.div`
-    background-color: ${colors.basic.SILVER};
+    background-color: ${colors.basic.GRAY_LIGHTEST};
     min-height: calc(100% - 60px);
     padding-bottom: 20px;
     position: relative;
 `
+
+// background: linear-gradient(135deg, #5ab9ea 0%, #5680e9 100%);
 const Footer = styled.div`
-    background-color: ${colors.basic.ORANGE};
     bottom: 0;
     height: 20px;
     position: absolute;

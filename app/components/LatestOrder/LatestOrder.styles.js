@@ -1,6 +1,7 @@
-import styled, { keyframes } from 'styled-components'
+import styled from 'styled-components'
 
 import { colors, typography } from 'styles'
+import { ButtonWithWiggle } from 'components/Button/Button.styles'
 
 export const LatestOrderContainer = styled.div`
     text-align: center;
@@ -18,44 +19,6 @@ const CardHeader = styled.div`
     align-items: center;
     display: flex;
     position: relative;
-`
-
-const wiggleAnimation = keyframes`
-    0% {
-        transform: rotate(3deg);
-    }
-
-    50% {
-        transform: rotate(-3deg);
-    }
-
-    100% {
-        transform: rotate(3deg);
-    }
-`
-const Button = styled.div`
-    display: flex;
-    margin: 10px;
-    padding: 12px;
-    cursor: pointer;
-    user-select: none;
-    transition: all 150ms linear;
-    text-align: center;
-    white-space: nowrap;
-    text-transform: uppercase;
-    color: #fff;
-    border: 0 none;
-    font-size: 13px;
-    font-weight: 500;
-    line-height: 1.3;
-    background-color: #416dea;
-    box-shadow: 2px 5px 10px #e4e4e4;
-    animation: 1s ${wiggleAnimation} ease-out infinite;
-
-    &:hover {
-        transition: all 150ms linear;
-        opacity: 0.85;
-    }
 `
 
 export const HostingCard = Card.extend`
@@ -87,7 +50,7 @@ export const HostSubText = styled.div`
     font-size: 13px;
     margin-top: 4px;
 `
-export const HostButton = Button
+export const HostButton = ButtonWithWiggle
 
 export const OrderCard = Card.extend`
     max-width: calc(80% - 20px);

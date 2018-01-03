@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types'
 import React from 'react'
-import GoogleLogin from 'react-google-login'
 import styled from 'styled-components'
 
 import { colors } from 'styles'
+import GoogleLoginButton from './GoogleLoginButton'
 
 export const LoginPanelContainer = styled.div`
     height: 100px;
@@ -35,12 +35,10 @@ class LoginPanel extends React.PureComponent {
                     <i className="fas fa-utensils fa-lg" />&nbsp; Good Morning,
                     TopHat! 🍌
                 </LoginTitle>
-                <GoogleLogin
+                <GoogleLoginButton
                     clientId="979241073886-66fsr3mmbnsi2bvfs6n8d380nh1o4tpd.apps.googleusercontent.com"
-                    buttonText="Login"
                     onSuccess={this.props.onGoogleSuccess}
                     onFailure={this.props.onGoogleFail}
-                    isSignedIn={true}
                 />
                 {this.props.isErrored ? getErrorMessage() : null}
             </LoginPanelContainer>

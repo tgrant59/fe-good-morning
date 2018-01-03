@@ -81,7 +81,7 @@ const getHostText = order => {
     if (!hasHostAccepted) {
         return (
             <span>
-                <i className="fas fa-user" />&nbsp; This order needs a host!
+                This order needs a host! &nbsp; <i className="fas fa-user" />
             </span>
         )
     }
@@ -89,16 +89,16 @@ const getHostText = order => {
     if (hasOrderShipped) {
         return (
             <span>
-                <i className="fas fa-ship" />&nbsp; This order has already
-                shipped!
+                This order has already shipped! &nbsp;
+                <i className="fas fa-ship" />
             </span>
         )
     }
 
     return (
         <span>
-            <i className="fas fa-cart-arrow-down" />&nbsp; Place your order,
-            now!
+            Place your order, now! &nbsp;
+            <i className="fas fa-cart-arrow-down" />
         </span>
     )
 }

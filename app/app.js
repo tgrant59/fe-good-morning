@@ -8,7 +8,7 @@ import createHistory from 'history/createBrowserHistory'
 import 'sanitize.css/sanitize.css'
 import 'semantic-ui-css/semantic.min.css'
 
-// import '!file-loader?name=[name].[ext]!./assets/favicon.ico'  // eslint-disable-line
+import '!file-loader?name=[name].[ext]!./assets/favicon.ico'  // eslint-disable-line
 
 import App from 'containers/App'
 import './styles/global-styles'

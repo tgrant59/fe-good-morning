@@ -1,4 +1,4 @@
-import { darken } from 'polished'
+import { lighten } from 'polished'
 import styled from 'styled-components'
 
 import { colors, typography } from 'styles'
@@ -29,7 +29,7 @@ export const AddOptionSection = styled.div`
     }
 `
 export const AddButton = styled.button`
-    background-color: ${colors.basic.ORANGE};
+    background-color: ${colors.theme.BLUE_DARK};
     border-radius: 4px;
     color: ${colors.basic.WHITE};
     cursor: pointer;
@@ -41,6 +41,6 @@ export const AddButton = styled.button`
     width: 100%;
 
     &:hover {
-        background-color: ${darken(0.1, colors.basic.ORANGE)};
+        background-color: ${lighten(0.1, colors.theme.BLUE_DARK)};
     }
 `

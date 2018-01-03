@@ -6,6 +6,7 @@ export default {
         FUCHSIA: '#f012be',
         GRAY: '#aaaaaa',
         GRAY_LIGHT: '#ced6db',
+        GRAY_LIGHTEST: '#fbfbff',
         GREEN: '#2ecc40',
         LIME: '#01ff70',
         MAROON: '#85144b',
@@ -18,5 +19,12 @@ export default {
         TEAL: '#39cccc',
         WHITE: '#FFFFFF',
         YELLOW: '#ffdc00',
+    },
+    theme: {
+        BLUE_DARK: '#5680e9',
+        BLUE_LIGHT: '#84ceeb',
+        BLUE: '#5680e9',
+        PURPLE_LIGHT: '#c1c8e4',
+        PURPLE: '#8860d0',
     },
 }

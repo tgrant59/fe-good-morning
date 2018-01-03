@@ -8,7 +8,7 @@ import { colors } from 'styles'
 import routes from 'routes'
 
 const Container = styled.div`
-    background-color: ${colors.basic.ORANGE};
+    background: linear-gradient(135deg, #5680e9 0%, #5ab9ea 100%);
     color: ${colors.basic.WHITE};
     display: flex;
     height: 60px;
@@ -40,6 +40,7 @@ const UserNavItem = styled.div`
     display: flex;
     height: 60px;
     padding: 0 20px;
+    cursor: pointer;
 
     @media (max-width: 600px) {
         padding: 0 10px;
@@ -75,6 +76,13 @@ const Name = styled.div`
     }
 `
 
+const signOut = () => {
+    const auth2 = window.gapi.auth2.getAuthInstance()
+    auth2.signOut().then(() => {
+        window.location.reload()
+    })
+}
+
 const NavBar = ({ user }) => (
     <Container>
         <LogoNavItem>
@@ -90,7 +98,7 @@ const NavBar = ({ user }) => (
         <NavItem to={routes.ORDERS}>Orders</NavItem>
         <NavItem to={routes.ORDERS}>Ledger</NavItem>
         <NavItem to={routes.ORDERS}>History</NavItem>
-        <UserNavItem>
+        <UserNavItem onClick={signOut} title="Click here to signout">
             <IMG src={user ? user.get('imageUrl') : null} />
             <Name>{user ? user.get('name') : null}</Name>
         </UserNavItem>
