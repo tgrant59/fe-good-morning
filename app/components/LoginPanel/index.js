@@ -8,7 +8,7 @@ import GoogleLoginButton from './GoogleLoginButton'
 export const LoginPanelContainer = styled.div`
     height: 100px;
     left: 50%;
-    margin: -50px 0 0 -200px;
+    margin: -100px 0 0 -200px;
     position: absolute;
     width: 400px;
     top: 50%;
@@ -17,6 +17,10 @@ export const LoginPanelContainer = styled.div`
 export const LoginTitle = styled.div`
     font-size: 24px;
     margin-bottom: 20px;
+`
+export const LoginSubText = styled.div`
+    font-size: 14px;
+    margin-top: 12px;
 `
 export const ErrorMessage = styled.div`
     color: ${colors.basic.RED};
@@ -40,6 +44,9 @@ class LoginPanel extends React.PureComponent {
                     onSuccess={this.props.onGoogleSuccess}
                     onFailure={this.props.onGoogleFail}
                 />
+                <LoginSubText>
+                    (use your <strong>@tophat</strong> account)
+                </LoginSubText>
                 {this.props.isErrored ? getErrorMessage() : null}
             </LoginPanelContainer>
         )

@@ -1,56 +1,11 @@
 import styled from 'styled-components'
 
-import { colors, typography } from 'styles'
-import { ButtonWithWiggle } from 'components/Button/Button.styles'
+import { typography } from 'styles'
+import { Card, CardHeader } from 'components/Card/Card.styles'
 
 export const LatestOrderContainer = styled.div`
     text-align: center;
 `
-
-export const Card = styled.div`
-    background-color: ${colors.basic.WHITE};
-    box-shadow: rgba(0, 0, 0, 0.117647) 0 1px 6px,
-        rgba(0, 0, 0, 0.117647) 0 1px 4px;
-    padding: 20px;
-    margin: 0 auto 6px;
-    text-align: left;
-`
-const CardHeader = styled.div`
-    align-items: center;
-    display: flex;
-    position: relative;
-`
-
-export const HostingCard = Card.extend`
-    max-width: 80%;
-    z-index: 200;
-
-    @media (max-width: 600px) {
-        max-width: 100%;
-    }
-`
-export const HostingCardHeader = CardHeader.extend`
-    min-height: 60px;
-`
-export const HostImg = styled.img`
-    border-radius: 30px;
-    height: 60px;
-    position: absolute;
-    left: 0;
-`
-export const HostTextContainer = styled.span`
-    flex: 1;
-    font-size: 20px;
-    margin-left: 80px;
-`
-export const HostText = styled.div`
-    font-size: 20px;
-`
-export const HostSubText = styled.div`
-    font-size: 13px;
-    margin-top: 4px;
-`
-export const HostButton = ButtonWithWiggle
 
 export const OrderCard = Card.extend`
     max-width: calc(80% - 20px);

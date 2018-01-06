@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 import { Link } from 'react-router-dom'
-import styled from 'styled-components'
-import { darken } from 'polished'
+import styled, { css } from 'styled-components'
 
+import australianize from 'helpers/australianize'
 import { colors } from 'styles'
 import routes from 'routes'
 
@@ -17,6 +17,10 @@ const Container = styled.div`
 const Spacer = styled.div`
     flex: 1;
 `
+const activeCss = css`
+    color: ${colors.basic.WHITE};
+    box-shadow: inset 0 0 100px 100px rgba(255, 255, 255, 0.1);
+`
 const NavItem = styled(Link)`
     color: ${colors.basic.WHITE};
     cursor: pointer;
@@ -27,8 +31,7 @@ const NavItem = styled(Link)`
     transition: all 0.2s;
 
     &:hover {
-        color: ${colors.basic.WHITE};
-        background-color: ${darken(0.1, colors.basic.ORANGE)};
+        ${activeCss};
     }
 
     @media (max-width: 600px) {
@@ -41,6 +44,10 @@ const UserNavItem = styled.div`
     height: 60px;
     padding: 0 20px;
     cursor: pointer;
+
+    &:hover {
+        ${activeCss};
+    }
 
     @media (max-width: 600px) {
         padding: 0 10px;
@@ -95,12 +102,12 @@ const NavBar = ({ user }) => (
             </LogoNavText>
         </LogoNavItem>
         <Spacer />
-        <NavItem to={routes.ORDERS}>Orders</NavItem>
+        <NavItem to={routes.ORDERS}>Today</NavItem>
         <NavItem to={routes.ORDERS}>Ledger</NavItem>
         <NavItem to={routes.ORDERS}>History</NavItem>
         <UserNavItem onClick={signOut} title="Click here to signout">
             <IMG src={user ? user.get('imageUrl') : null} />
-            <Name>{user ? user.get('name') : null}</Name>
+            <Name>{user ? australianize(user.get('name')) : null}</Name>
         </UserNavItem>
     </Container>
 )

@@ -36,6 +36,7 @@ export class Orders extends React.PureComponent {
         isOrdering: PropTypes.bool,
         items: PropTypes.object,
         order: PropTypes.object,
+        currentUser: PropTypes.object,
         loadItems: PropTypes.func.isRequired,
         loadLatestOrder: PropTypes.func.isRequired,
     }
@@ -61,18 +62,23 @@ export class Orders extends React.PureComponent {
                     isOrdering={this.props.isOrdering}
                     items={this.props.items}
                     order={this.props.order}
+                    currentUser={this.props.currentUser}
                 />
             </Container>
         )
     }
 }
 
-const mapStateToProps = state => ({
-    hasOrdered: selectHasOrdered(state),
-    isOrdering: selectIsOrdering(state),
-    items: selectItems(state),
-    order: selectOrder(state),
-})
+const mapStateToProps = state => {
+    const loginState = state.get('login')
+    return {
+        hasOrdered: selectHasOrdered(state),
+        isOrdering: selectIsOrdering(state),
+        items: selectItems(state),
+        order: selectOrder(state),
+        currentUser: loginState ? loginState.get('user') : null,
+    }
+}
 
 const mapDispatchToProps = {
     addOrder,

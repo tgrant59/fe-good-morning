@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 import { colors, typography } from 'styles'
 
-import { Card } from '../LatestOrder.styles'
+import { Card } from 'components/Card/Card.styles'
 
 export const AddCard = Card.extend`
     max-width: 80%;

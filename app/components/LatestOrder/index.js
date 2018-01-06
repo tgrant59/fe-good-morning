@@ -1,16 +1,11 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 
+import australianize from 'helpers/australianize'
+
 import AddOrderForm from './AddOrderForm'
 import {
     LatestOrderContainer,
-    HostingCard,
-    HostingCardHeader,
-    HostImg,
-    HostTextContainer,
-    HostText,
-    HostSubText,
-    HostButton,
     OrderCard,
     OrderCardHeader,
     OrderImg,
@@ -19,6 +14,7 @@ import {
     OrderItemOptions,
     OrderItemOptionSection,
 } from './LatestOrder.styles'
+import OrderDetails from './OrderDetails'
 
 const getOrderedItemOptionSection = optionSection => (
     <OrderItemOptionSection key={optionSection.get('name')}>
@@ -36,7 +32,7 @@ const getOrderedItem = (orderedItem, index) => (
         <OrderCardHeader>
             <OrderImg src={orderedItem.getIn(['owner', 'picture'])} />
             <OrderText>
-                {orderedItem.getIn(['owner', 'name'])} is getting
+                {australianize(orderedItem.getIn(['owner', 'name']))} is getting
             </OrderText>
         </OrderCardHeader>
         <OrderItemName>{orderedItem.get('name')}</OrderItemName>
@@ -46,80 +42,27 @@ const getOrderedItem = (orderedItem, index) => (
     </OrderCard>
 )
 
-const getHostButton = order => {
-    // TODO determine whether current user is hot
-    const isCurrentUserHost = false
-    const hasHostAccepted = order.getIn(['details', 'accepted'])
-    const hasOrderShipped = order.getIn(['details', 'orderedAt']) !== null
-
-    if (!hasHostAccepted) {
-        const message = isCurrentUserHost
-            ? `Accept to be host`
-            : `Host this order`
-        return (
-            <HostButton>
-                <i className="fas fa-user" />&nbsp;{message}
-            </HostButton>
-        )
-    }
-
-    if (hasOrderShipped) {
-        return (
-            <span>
-                <i className="fas fa-ship fa-lg" />&nbsp;
-            </span>
-        )
-    }
-
-    return null
-}
-
-const getHostText = order => {
-    const hasHostAccepted = order.getIn(['details', 'accepted'])
-    const hasOrderShipped = order.getIn(['details', 'orderedAt']) !== null
-
-    if (!hasHostAccepted) {
-        return (
-            <span>
-                This order needs a host! &nbsp; <i className="fas fa-user" />
-            </span>
-        )
-    }
-
-    if (hasOrderShipped) {
-        return (
-            <span>
-                This order has already shipped! &nbsp;
-                <i className="fas fa-ship" />
-            </span>
-        )
-    }
-
-    return (
-        <span>
-            Place your order, now! &nbsp;
-            <i className="fas fa-cart-arrow-down" />
-        </span>
-    )
-}
-
-const LatestOrder = ({ addOrder, hasOrdered, isOrdering, items, order }) => {
+const LatestOrder = ({
+    addOrder,
+    hasOrdered,
+    isOrdering,
+    items,
+    order,
+    currentUser,
+}) => {
     if (!order) return <div>Loading</div>
+    const isCurrentUserHost =
+        order.getIn(['host', 'id']) === currentUser.get('id')
     return (
         <LatestOrderContainer>
-            <HostingCard key="host">
-                <HostingCardHeader>
-                    <HostImg src={order.getIn(['host', 'picture'])} />
-                    <HostTextContainer>
-                        <HostText>{getHostText(order)}</HostText>
-                        <HostSubText>
-                            {order.getIn(['host', 'name'])} is hosting this
-                            order
-                        </HostSubText>
-                    </HostTextContainer>
-                    {getHostButton(order)}
-                </HostingCardHeader>
-            </HostingCard>
+            <OrderDetails
+                isCurrentUserHost={isCurrentUserHost}
+                hasHostAccepted={order.getIn(['details', 'accepted'])}
+                hasOrderShipped={order.getIn(['details', 'orderedAt']) !== null}
+                hostName={order.getIn(['host', 'name'])}
+                hostPicture={order.getIn(['host', 'picture'])}
+                order={order}
+            />
             {order.get('orderedItems').map(getOrderedItem)}
             <h1>Add to Order</h1>
             <AddOrderForm
@@ -138,6 +81,7 @@ LatestOrder.propTypes = {
     isOrdering: PropTypes.bool,
     items: PropTypes.object,
     order: PropTypes.object,
+    currentUser: PropTypes.object,
 }
 
 LatestOrder.defaultProps = {
