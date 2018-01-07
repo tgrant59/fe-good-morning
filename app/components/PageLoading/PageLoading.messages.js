@@ -1,4 +1,4 @@
 export default {
-    loadingMessage: 'Steeping Tea...',
-    errorMessage: 'Error Loading Component',
+    loadingMessage: 'PageLoading - Steeping Tea...',
+    errorMessage: 'PageLoading - Error Loading Component',
 }

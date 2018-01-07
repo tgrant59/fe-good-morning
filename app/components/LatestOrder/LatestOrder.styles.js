@@ -64,5 +64,5 @@ export const OrderItemOptionSection = styled.div`
 `
 
 export const OrderShippedSection = styled.div`
-    margin: 48px auto 24px auto;
+    margin: 48px auto 24px;
 `

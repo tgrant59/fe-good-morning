@@ -25,7 +25,7 @@ const shakeAnimation = keyframes`
 `
 
 const buttonDisabled = css`
-    opacity: 0.65; 
+    opacity: 0.65;
     cursor: wait;
 `
 
@@ -47,9 +47,7 @@ export const Button = styled.button`
     line-height: 1.3;
     background-color: ${colors.theme.BLUE_DARK};
     box-shadow: 2px 5px 10px #e4e4e4;
-    transition: all 150ms linear;
     outline: none;
-
     ${props => (props.disabled ? buttonDisabled : '')};
 
     &:hover:enabled {

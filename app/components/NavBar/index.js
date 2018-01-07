@@ -3,7 +3,6 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import styled, { css } from 'styled-components'
 
-import australianize from 'helpers/australianize'
 import { colors } from 'styles'
 import routes from 'routes'
 
@@ -107,7 +106,7 @@ const NavBar = ({ user }) => (
         <NavItem to={routes.ORDERS}>History</NavItem>
         <UserNavItem onClick={signOut} title="Click here to signout">
             <IMG src={user ? user.get('imageUrl') : null} />
-            <Name>{user ? australianize(user.get('name')) : null}</Name>
+            <Name>{user ? user.get('name') : null}</Name>
         </UserNavItem>
     </Container>
 )

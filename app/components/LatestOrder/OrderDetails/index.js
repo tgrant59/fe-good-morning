@@ -1,8 +1,6 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 
-import australianize from 'helpers/australianize'
-
 import {
     HostingCard,
     HostingCardHeader,
@@ -26,16 +24,6 @@ class OrderDetails extends React.Component {
         hostName: PropTypes.string.isRequired,
         hostPicture: PropTypes.string.isRequired,
         orderId: PropTypes.string.isRequired,
-    }
-
-    state = {
-        aussieHostName: '',
-    }
-
-    componentWillReceiveProps(nextProps) {
-        this.setState({
-            aussieHostName: australianize(nextProps.hostName),
-        })
     }
 
     getHostButton = () => {
@@ -124,24 +112,24 @@ class OrderDetails extends React.Component {
             hasHostAccepted,
             hasOrderShipped,
             isCurrentUserHost,
+            hostName,
         } = this.props
-        const { aussieHostName } = this.state
 
         if (!hasHostAccepted) {
             return isCurrentUserHost
-                ? `${aussieHostName}, come on mate`
-                : `${aussieHostName} is AWOL, I know you want to host this banana 😉`
+                ? `${hostName}, come on mate`
+                : `${hostName} is AWOL, I know you want to host this banana 😉`
         }
 
         if (hasOrderShipped) {
             return isCurrentUserHost
                 ? `You hosted this order`
-                : `${aussieHostName} hosted this order`
+                : `${hostName} hosted this order`
         }
 
         return isCurrentUserHost
             ? `You are hosting this order, when you're done click 'Close and Settle' to Close this order, and settle ledgers`
-            : `${aussieHostName} is hosting this order`
+            : `${hostName} is hosting this order`
     }
 
     acceptToBeHost = () => {

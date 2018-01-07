@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 
-import australianize from 'helpers/australianize'
+import LoadingSplash from 'components/LoadingSplash'
 
 import AddOrderForm from './AddOrderForm'
 import {
@@ -33,7 +33,7 @@ const getOrderedItem = (orderedItem, index, hasOrderShipped) => (
         <OrderCardHeader>
             <OrderImg src={orderedItem.getIn(['owner', 'picture'])} />
             <OrderText>
-                {australianize(orderedItem.getIn(['owner', 'name']))}
+                {orderedItem.getIn(['owner', 'name'])}
                 {hasOrderShipped ? ` got` : ` is getting`}
             </OrderText>
         </OrderCardHeader>
@@ -56,7 +56,7 @@ const LatestOrder = ({
     order,
     currentUser,
 }) => {
-    if (!order) return <div>Loading</div>
+    if (!order) return <LoadingSplash />
     const isCurrentUserHost =
         order.getIn(['host', 'id']) === currentUser.get('id')
     const hasOrderShipped = order.getIn(['details', 'orderedAt']) !== null
