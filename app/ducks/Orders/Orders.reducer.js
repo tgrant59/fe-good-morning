@@ -7,6 +7,9 @@ import {
     ADD_ORDER_REQUESTED,
     ADD_ORDER_FAILURE,
     ADD_ORDER_SUCCESS,
+    ACCEPT_TO_BE_HOST_REQUESTED,
+    ACCEPT_TO_BE_HOST_SUCCESS,
+    ACCEPT_TO_BE_HOST_FAILURE,
 } from './Orders.actions'
 
 export const initialState = fromJS({
@@ -16,9 +19,12 @@ export const initialState = fromJS({
     submittingOrder: false,
     orderSubmitted: false,
     orderError: false,
+    acceptingTobeHost: false,
+    acceptedTobeHost: false,
+    acceptTobeHostError: false,
 })
 
-const loginReducer = (state = initialState, action) => {
+const orderReducer = (state = initialState, action) => {
     switch (action.type) {
         case LOAD_LATEST_ORDER_REQUESTED:
             return state.merge({
@@ -52,9 +58,23 @@ const loginReducer = (state = initialState, action) => {
                 submittingOrder: false,
                 orderError: true,
             })
+        case ACCEPT_TO_BE_HOST_REQUESTED:
+            return state.merge({
+                acceptingTobeHost: true,
+            })
+        case ACCEPT_TO_BE_HOST_SUCCESS:
+            return state.merge({
+                acceptingTobeHost: false,
+                acceptedTobeHost: true,
+            })
+        case ACCEPT_TO_BE_HOST_FAILURE:
+            return state.merge({
+                acceptingTobeHost: false,
+                acceptTobeHostError: true,
+            })
         default:
             return state
     }
 }
 
-export default loginReducer
+export default orderReducer

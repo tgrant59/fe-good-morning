@@ -34,6 +34,14 @@ export const selectIsOrdering = createSelector(selectOrderState, orderState => {
     return orderState.get('isOrdering')
 })
 
+export const selectAcceptingTobeHost = createSelector(
+    selectOrderState,
+    orderState => {
+        if (!orderState) return null
+        return orderState.get('acceptingTobeHost')
+    },
+)
+
 export const selectHasOrdered = createSelector(selectOrderState, orderState => {
     if (!orderState) return null
     return orderState.get('hasOrdered')

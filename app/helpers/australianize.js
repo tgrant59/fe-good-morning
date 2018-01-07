@@ -11,7 +11,15 @@ export default function(userName) {
     const firstName = userName.split(' ')[0]
     const firstNameCapitalized = capitalizeJustFirstLetter(firstName)
     let aussieName = firstNameCapitalized
-    if (aussieName.endsWith('a') || aussieName.endsWith('o')) {
+    if (aussieName === 'Shouvik') {
+        aussieName = 'Rosé'
+    } else if (aussieName.endsWith('ine')) {
+        // Drop the last 3 letters
+        aussieName = aussieName.slice(0, -3)
+    } else if (aussieName.endsWith('ly') || aussieName.endsWith('ie')) {
+        // Drop the last 2 letters
+        aussieName = aussieName.slice(0, -2)
+    } else if (aussieName.endsWith('a') || aussieName.endsWith('o')) {
         // Drop the last letter
         aussieName = aussieName.slice(0, -1)
     }

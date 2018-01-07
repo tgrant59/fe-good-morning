@@ -15,11 +15,14 @@ import {
 
 class OrderDetails extends React.Component {
     static propTypes = {
+        acceptToBeHost: PropTypes.func.isRequired,
+        acceptingTobeHost: PropTypes.bool.isRequired,
         isCurrentUserHost: PropTypes.bool.isRequired,
         hasHostAccepted: PropTypes.bool.isRequired,
         hasOrderShipped: PropTypes.bool.isRequired,
         hostName: PropTypes.string.isRequired,
         hostPicture: PropTypes.string.isRequired,
+        orderId: PropTypes.string.isRequired,
     }
 
     state = {
@@ -34,6 +37,7 @@ class OrderDetails extends React.Component {
 
     getHostButton = () => {
         const {
+            acceptingTobeHost,
             hasHostAccepted,
             hasOrderShipped,
             isCurrentUserHost,
@@ -52,7 +56,10 @@ class OrderDetails extends React.Component {
                 ? `Accept to be host`
                 : `Host this order`
             return (
-                <HostButton>
+                <HostButton
+                    disabled={acceptingTobeHost}
+                    onClick={this.acceptToBeHost}
+                >
                     <i className="fas fa-user" />&nbsp;{message}
                 </HostButton>
             )
@@ -120,6 +127,11 @@ class OrderDetails extends React.Component {
         return isCurrentUserHost
             ? `You are hosting this order`
             : `${aussieHostName} is hosting this order`
+    }
+
+    acceptToBeHost = () => {
+        const { acceptToBeHost, isCurrentUserHost, orderId } = this.props
+        acceptToBeHost({ orderId, isCurrentUserHost })
     }
 
     render() {

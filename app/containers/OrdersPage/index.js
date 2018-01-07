@@ -10,10 +10,11 @@ import { loadItems } from 'ducks/Items/Items.actions'
 import itemsReducer from 'ducks/Items/Items.reducer'
 import itemsSaga from 'ducks/Items/Items.saga'
 import { selectItems } from 'ducks/Items/Items.selectors'
-import { addOrder, loadLatestOrder } from 'ducks/Orders/Orders.actions'
+import { acceptToBeHost, addOrder, loadLatestOrder } from 'ducks/Orders/Orders.actions'
 import ordersReducer from 'ducks/Orders/Orders.reducer'
 import ordersSaga from 'ducks/Orders/Orders.saga'
 import {
+    selectAcceptingTobeHost,
     selectOrder,
     selectHasOrdered,
     selectIsOrdering,
@@ -31,6 +32,8 @@ const Container = styled.div`
 
 export class Orders extends React.PureComponent {
     static propTypes = {
+        acceptToBeHost: PropTypes.func.isRequired,
+        acceptingTobeHost: PropTypes.bool,
         addOrder: PropTypes.func.isRequired,
         hasOrdered: PropTypes.bool,
         isOrdering: PropTypes.bool,
@@ -42,6 +45,7 @@ export class Orders extends React.PureComponent {
     }
 
     static defaultProps = {
+        acceptingTobeHost: false,
         hasOrdered: false,
         isOrdering: false,
         items: new Immutable.List(),
@@ -57,6 +61,8 @@ export class Orders extends React.PureComponent {
         return (
             <Container>
                 <LatestOrder
+                    acceptToBeHost={this.props.acceptToBeHost}
+                    acceptingTobeHost={this.props.acceptingTobeHost}
                     addOrder={this.props.addOrder}
                     hasOrdered={this.props.hasOrdered}
                     isOrdering={this.props.isOrdering}
@@ -72,6 +78,7 @@ export class Orders extends React.PureComponent {
 const mapStateToProps = state => {
     const loginState = state.get('login')
     return {
+        acceptingTobeHost: selectAcceptingTobeHost(state),
         hasOrdered: selectHasOrdered(state),
         isOrdering: selectIsOrdering(state),
         items: selectItems(state),
@@ -81,6 +88,7 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = {
+    acceptToBeHost,
     addOrder,
     loadItems,
     loadLatestOrder,

@@ -1,5 +1,6 @@
-import styled, { keyframes } from 'styled-components'
-import { colors } from 'styles'
+import styled, { keyframes, css } from 'styled-components'
+import { colors, typography } from 'styles'
+import {lighten} from "polished/lib/index";
 
 const shakeAnimation = keyframes`
     10%,
@@ -24,10 +25,16 @@ const shakeAnimation = keyframes`
     }
 `
 
-export const Button = styled.div`
+const buttonDisabled = css`
+    opacity: 0.65; 
+    cursor: not-allowed;
+`
+
+export const Button = styled.button`
     display: inline-block;
+    border-radius: 4px;
     margin: 10px;
-    padding: 12px;
+    padding: 10px 30px;
     cursor: pointer;
     user-select: none;
     transition: all 150ms linear;
@@ -36,14 +43,17 @@ export const Button = styled.div`
     text-transform: uppercase;
     color: #fff;
     border: 0;
-    font-size: 13px;
-    font-weight: 500;
+    font-size: 18px;
+    font-weight: ${typography.fontWeights.EXTRA_LIGHT};
     line-height: 1.3;
-    background-color: ${colors.theme.BLUE};
+    background-color: ${colors.theme.BLUE_DARK};
     box-shadow: 2px 5px 10px #e4e4e4;
+    transition: all 150ms linear;
+    outline: none;
 
-    &:hover {
-        transition: all 150ms linear;
+    ${props => (props.disabled ? buttonDisabled : '')};
+
+    &:hover:enabled {
         opacity: 0.85;
     }
 `

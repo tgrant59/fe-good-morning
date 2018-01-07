@@ -43,6 +43,8 @@ const getOrderedItem = (orderedItem, index) => (
 )
 
 const LatestOrder = ({
+    acceptToBeHost,
+    acceptingTobeHost,
     addOrder,
     hasOrdered,
     isOrdering,
@@ -56,12 +58,14 @@ const LatestOrder = ({
     return (
         <LatestOrderContainer>
             <OrderDetails
+                acceptToBeHost={acceptToBeHost}
+                acceptingTobeHost={acceptingTobeHost}
                 isCurrentUserHost={isCurrentUserHost}
                 hasHostAccepted={order.getIn(['details', 'accepted'])}
                 hasOrderShipped={order.getIn(['details', 'orderedAt']) !== null}
                 hostName={order.getIn(['host', 'name'])}
                 hostPicture={order.getIn(['host', 'picture'])}
-                order={order}
+                orderId={order.get('id')}
             />
             {order.get('orderedItems').map(getOrderedItem)}
             <h1>Add to Order</h1>
@@ -76,6 +80,8 @@ const LatestOrder = ({
 }
 
 LatestOrder.propTypes = {
+    acceptToBeHost: PropTypes.func.isRequired,
+    acceptingTobeHost: PropTypes.bool,
     addOrder: PropTypes.func.isRequired,
     hasOrdered: PropTypes.bool,
     isOrdering: PropTypes.bool,
@@ -85,6 +91,7 @@ LatestOrder.propTypes = {
 }
 
 LatestOrder.defaultProps = {
+    acceptingTobeHost: false,
     hasOrdered: false,
     isOrdering: false,
 }

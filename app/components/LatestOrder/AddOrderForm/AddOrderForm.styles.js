@@ -1,8 +1,6 @@
-import { lighten } from 'polished'
 import styled from 'styled-components'
 
-import { colors, typography } from 'styles'
-
+import { Button } from 'components/Button/Button.styles'
 import { Card } from 'components/Card/Card.styles'
 
 export const AddCard = Card.extend`
@@ -28,19 +26,7 @@ export const AddOptionSection = styled.div`
         white-space: nowrap;
     }
 `
-export const AddButton = styled.button`
-    background-color: ${colors.theme.BLUE_DARK};
-    border-radius: 4px;
-    color: ${colors.basic.WHITE};
-    cursor: pointer;
-    font-size: 18px;
-    font-weight: ${typography.fontWeights.EXTRA_LIGHT};
+export const AddButton = Button.extend`
     margin-top: 20px;
-    padding: 10px 30px;
-    transition: all 0.2s;
     width: 100%;
-
-    &:hover {
-        background-color: ${lighten(0.1, colors.theme.BLUE_DARK)};
-    }
 `

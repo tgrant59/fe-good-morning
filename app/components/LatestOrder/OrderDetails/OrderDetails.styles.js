@@ -32,4 +32,6 @@ export const HostSubText = styled.div`
     font-size: 13px;
     margin-top: 4px;
 `
-export const HostButton = ButtonWithWiggle
+export const HostButton = ButtonWithWiggle.extend`
+    font-size: 15px;
+`

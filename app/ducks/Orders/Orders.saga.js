@@ -9,11 +9,14 @@ import { selectOrder } from './Orders.selectors'
 import {
     LOAD_LATEST_ORDER_REQUESTED,
     ADD_ORDER_REQUESTED,
+    ACCEPT_TO_BE_HOST_REQUESTED,
     loadLatestOrder,
     loadLatestOrderSuccess,
     loadLatestOrderFailure,
     addOrderSuccess,
     addOrderFailure,
+    acceptToBeHostSuccess,
+    acceptToBeHostFailure,
 } from './Orders.actions'
 
 export function* getLatestOrder() {
@@ -32,6 +35,30 @@ export function* getLatestOrder() {
         }
     } catch (error) {
         yield put(loadLatestOrderFailure(error))
+    }
+}
+
+export function* acceptToBeHost(action) {
+    const token = yield select(selectToken)
+    const { orderId, isCurrentUserHost } = action.payload
+
+    let requestURL
+    if (isCurrentUserHost) {
+        requestURL = `/orders/${orderId}/accept`
+    } else {
+        requestURL = `/orders/${orderId}/own`
+    }
+
+    try {
+        const response = yield call(backend.get, requestURL, token)
+        if (response.status >= 400) {
+            yield put(acceptToBeHostFailure(response.data))
+        } else {
+            yield put(acceptToBeHostSuccess(response.data))
+            yield put(loadLatestOrder())
+        }
+    } catch (error) {
+        yield put(acceptToBeHostFailure(error))
     }
 }
 
@@ -77,4 +104,5 @@ export function* addOrder(action) {
 export default function* orderSagaWatcher() {
     yield takeLatest(LOAD_LATEST_ORDER_REQUESTED, getLatestOrder)
     yield takeLatest(ADD_ORDER_REQUESTED, addOrder)
+    yield takeLatest(ACCEPT_TO_BE_HOST_REQUESTED, acceptToBeHost)
 }
