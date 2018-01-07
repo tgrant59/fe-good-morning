@@ -10,6 +10,7 @@ import {
     LOAD_LATEST_ORDER_REQUESTED,
     ADD_ORDER_REQUESTED,
     ACCEPT_TO_BE_HOST_REQUESTED,
+    CLOSE_AND_SETTLE_REQUESTED,
     loadLatestOrder,
     loadLatestOrderSuccess,
     loadLatestOrderFailure,
@@ -17,6 +18,8 @@ import {
     addOrderFailure,
     acceptToBeHostSuccess,
     acceptToBeHostFailure,
+    closeAndSettleSuccess,
+    closeAndSettleFailure,
 } from './Orders.actions'
 
 export function* getLatestOrder() {
@@ -59,6 +62,24 @@ export function* acceptToBeHost(action) {
         }
     } catch (error) {
         yield put(acceptToBeHostFailure(error))
+    }
+}
+
+export function* closeAndSettle(action) {
+    const token = yield select(selectToken)
+    const { orderId } = action.payload
+    const requestURL = `/orders/${orderId}/close-and-settle`
+
+    try {
+        const response = yield call(backend.get, requestURL, token)
+        if (response.status >= 400) {
+            yield put(closeAndSettleFailure(response.data))
+        } else {
+            yield put(closeAndSettleSuccess(response.data))
+            yield put(loadLatestOrder())
+        }
+    } catch (error) {
+        yield put(closeAndSettleFailure(error))
     }
 }
 
@@ -105,4 +126,5 @@ export default function* orderSagaWatcher() {
     yield takeLatest(LOAD_LATEST_ORDER_REQUESTED, getLatestOrder)
     yield takeLatest(ADD_ORDER_REQUESTED, addOrder)
     yield takeLatest(ACCEPT_TO_BE_HOST_REQUESTED, acceptToBeHost)
+    yield takeLatest(CLOSE_AND_SETTLE_REQUESTED, closeAndSettle)
 }

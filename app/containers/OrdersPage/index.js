@@ -10,11 +10,17 @@ import { loadItems } from 'ducks/Items/Items.actions'
 import itemsReducer from 'ducks/Items/Items.reducer'
 import itemsSaga from 'ducks/Items/Items.saga'
 import { selectItems } from 'ducks/Items/Items.selectors'
-import { acceptToBeHost, addOrder, loadLatestOrder } from 'ducks/Orders/Orders.actions'
+import {
+    acceptToBeHost,
+    closeAndSettle,
+    addOrder,
+    loadLatestOrder,
+} from 'ducks/Orders/Orders.actions'
 import ordersReducer from 'ducks/Orders/Orders.reducer'
 import ordersSaga from 'ducks/Orders/Orders.saga'
 import {
     selectAcceptingTobeHost,
+    selectClosingAndSettling,
     selectOrder,
     selectHasOrdered,
     selectIsOrdering,
@@ -35,6 +41,8 @@ export class Orders extends React.PureComponent {
         acceptToBeHost: PropTypes.func.isRequired,
         acceptingTobeHost: PropTypes.bool,
         addOrder: PropTypes.func.isRequired,
+        closeAndSettle: PropTypes.func.isRequired,
+        closingAndSettling: PropTypes.bool,
         hasOrdered: PropTypes.bool,
         isOrdering: PropTypes.bool,
         items: PropTypes.object,
@@ -46,6 +54,7 @@ export class Orders extends React.PureComponent {
 
     static defaultProps = {
         acceptingTobeHost: false,
+        closingAndSettling: false,
         hasOrdered: false,
         isOrdering: false,
         items: new Immutable.List(),
@@ -63,6 +72,8 @@ export class Orders extends React.PureComponent {
                 <LatestOrder
                     acceptToBeHost={this.props.acceptToBeHost}
                     acceptingTobeHost={this.props.acceptingTobeHost}
+                    closeAndSettle={this.props.closeAndSettle}
+                    closingAndSettling={this.props.closingAndSettling}
                     addOrder={this.props.addOrder}
                     hasOrdered={this.props.hasOrdered}
                     isOrdering={this.props.isOrdering}
@@ -79,6 +90,7 @@ const mapStateToProps = state => {
     const loginState = state.get('login')
     return {
         acceptingTobeHost: selectAcceptingTobeHost(state),
+        closingAndSettling: selectClosingAndSettling(state),
         hasOrdered: selectHasOrdered(state),
         isOrdering: selectIsOrdering(state),
         items: selectItems(state),
@@ -89,6 +101,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = {
     acceptToBeHost,
+    closeAndSettle,
     addOrder,
     loadItems,
     loadLatestOrder,

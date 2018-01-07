@@ -13,6 +13,12 @@ export const ACCEPT_TO_BE_HOST_SUCCESS =
     'fe-good-morning/Orders/ACCEPT_TO_BE_HOST_SUCCESS'
 export const ACCEPT_TO_BE_HOST_FAILURE =
     'fe-good-morning/Orders/ACCEPT_TO_BE_HOST_FAILURE'
+export const CLOSE_AND_SETTLE_REQUESTED =
+    'fe-good-morning/Orders/CLOSE_AND_SETTLE_REQUESTED'
+export const CLOSE_AND_SETTLE_SUCCESS =
+    'fe-good-morning/Orders/CLOSE_AND_SETTLE_SUCCESS'
+export const CLOSE_AND_SETTLE_FAILURE =
+    'fe-good-morning/Orders/CLOSE_AND_SETTLE_FAILURE'
 
 export const loadLatestOrder = () => ({
     type: LOAD_LATEST_ORDER_REQUESTED,
@@ -52,5 +58,19 @@ export const acceptToBeHostSuccess = () => ({
 
 export const acceptToBeHostFailure = error => ({
     type: ACCEPT_TO_BE_HOST_FAILURE,
+    payload: { error },
+})
+
+export const closeAndSettle = ({ orderId }) => ({
+    type: CLOSE_AND_SETTLE_REQUESTED,
+    payload: { orderId },
+})
+
+export const closeAndSettleSuccess = () => ({
+    type: CLOSE_AND_SETTLE_SUCCESS,
+})
+
+export const closeAndSettleFailure = error => ({
+    type: CLOSE_AND_SETTLE_FAILURE,
     payload: { error },
 })

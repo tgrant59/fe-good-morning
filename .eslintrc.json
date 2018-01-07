@@ -34,6 +34,7 @@
     "import/no-webpack-loader-syntax": 0,
     "import/prefer-default-export": 0,
     "jsx-a11y/aria-props": 2,
+    "jsx-a11y/accessible-emoji": 0,
     "jsx-a11y/heading-has-content": 0,
     "jsx-a11y/href-no-hash": "off",
     "jsx-a11y/anchor-is-valid": 0,

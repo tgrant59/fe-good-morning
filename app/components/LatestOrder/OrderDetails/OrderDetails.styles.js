@@ -1,5 +1,7 @@
 import styled from 'styled-components'
 
+import { colors } from 'styles'
+
 import { ButtonWithWiggle } from 'components/Button/Button.styles'
 import { Card, CardHeader } from 'components/Card/Card.styles'
 
@@ -34,4 +36,8 @@ export const HostSubText = styled.div`
 `
 export const HostButton = ButtonWithWiggle.extend`
     font-size: 15px;
+`
+export const CloseAndSettleButton = ButtonWithWiggle.extend`
+    font-size: 15px;
+    background-color: ${colors.theme.PURPLE};
 `

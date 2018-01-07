@@ -62,3 +62,7 @@ export const OrderItemOptionSection = styled.div`
         margin: 0 20px;
     }
 `
+
+export const OrderShippedSection = styled.div`
+    margin: 48px auto 24px auto;
+`

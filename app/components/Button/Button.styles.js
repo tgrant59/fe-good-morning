@@ -1,6 +1,5 @@
 import styled, { keyframes, css } from 'styled-components'
 import { colors, typography } from 'styles'
-import {lighten} from "polished/lib/index";
 
 const shakeAnimation = keyframes`
     10%,
@@ -27,7 +26,7 @@ const shakeAnimation = keyframes`
 
 const buttonDisabled = css`
     opacity: 0.65; 
-    cursor: not-allowed;
+    cursor: wait;
 `
 
 export const Button = styled.button`

@@ -10,6 +10,9 @@ import {
     ACCEPT_TO_BE_HOST_REQUESTED,
     ACCEPT_TO_BE_HOST_SUCCESS,
     ACCEPT_TO_BE_HOST_FAILURE,
+    CLOSE_AND_SETTLE_REQUESTED,
+    CLOSE_AND_SETTLE_SUCCESS,
+    CLOSE_AND_SETTLE_FAILURE,
 } from './Orders.actions'
 
 export const initialState = fromJS({
@@ -22,6 +25,9 @@ export const initialState = fromJS({
     acceptingTobeHost: false,
     acceptedTobeHost: false,
     acceptTobeHostError: false,
+    closingAndSettling: false,
+    closedAndSettled: false,
+    closeAndSettleError: false,
 })
 
 const orderReducer = (state = initialState, action) => {
@@ -71,6 +77,20 @@ const orderReducer = (state = initialState, action) => {
             return state.merge({
                 acceptingTobeHost: false,
                 acceptTobeHostError: true,
+            })
+        case CLOSE_AND_SETTLE_REQUESTED:
+            return state.merge({
+                closingAndSettling: true,
+            })
+        case CLOSE_AND_SETTLE_SUCCESS:
+            return state.merge({
+                closingAndSettling: false,
+                closedAndSettled: true,
+            })
+        case CLOSE_AND_SETTLE_FAILURE:
+            return state.merge({
+                closingAndSettling: false,
+                closeAndSettleError: true,
             })
         default:
             return state
