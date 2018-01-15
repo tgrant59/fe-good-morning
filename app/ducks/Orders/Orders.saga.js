@@ -11,11 +11,14 @@ import {
     ADD_ORDER_REQUESTED,
     ACCEPT_TO_BE_HOST_REQUESTED,
     CLOSE_AND_SETTLE_REQUESTED,
+    REMOVE_ITEM_REQUESTED,
     loadLatestOrder,
     loadLatestOrderSuccess,
     loadLatestOrderFailure,
     addOrderSuccess,
     addOrderFailure,
+    removeItemSuccess,
+    removeItemFailure,
     acceptToBeHostSuccess,
     acceptToBeHostFailure,
     closeAndSettleSuccess,
@@ -83,6 +86,24 @@ export function* closeAndSettle(action) {
     }
 }
 
+export function* removeItem(action) {
+    const token = yield select(selectToken)
+    const { orderId, itemId } = action.payload
+    const requestURL = `/orders/${orderId}/${itemId}/remove`
+
+    try {
+        const response = yield call(backend.get, requestURL, token)
+        if (response.status >= 400) {
+            yield put(removeItemFailure({ orderId, itemId }))
+        } else {
+            yield put(removeItemSuccess({ orderId, itemId }))
+            yield put(loadLatestOrder())
+        }
+    } catch (error) {
+        yield put(removeItemFailure({ orderId, itemId }))
+    }
+}
+
 export function* addOrder(action) {
     const token = yield select(selectToken)
     const order = yield select(selectOrder)
@@ -125,6 +146,7 @@ export function* addOrder(action) {
 export default function* orderSagaWatcher() {
     yield takeLatest(LOAD_LATEST_ORDER_REQUESTED, getLatestOrder)
     yield takeLatest(ADD_ORDER_REQUESTED, addOrder)
+    yield takeLatest(REMOVE_ITEM_REQUESTED, removeItem)
     yield takeLatest(ACCEPT_TO_BE_HOST_REQUESTED, acceptToBeHost)
     yield takeLatest(CLOSE_AND_SETTLE_REQUESTED, closeAndSettle)
 }

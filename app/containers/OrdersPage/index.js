@@ -14,6 +14,7 @@ import {
     acceptToBeHost,
     closeAndSettle,
     addOrder,
+    removeItem,
     loadLatestOrder,
 } from 'ducks/Orders/Orders.actions'
 import ordersReducer from 'ducks/Orders/Orders.reducer'
@@ -41,6 +42,7 @@ export class Orders extends React.PureComponent {
         acceptToBeHost: PropTypes.func.isRequired,
         acceptingTobeHost: PropTypes.bool,
         addOrder: PropTypes.func.isRequired,
+        removeItem: PropTypes.func.isRequired,
         closeAndSettle: PropTypes.func.isRequired,
         closingAndSettling: PropTypes.bool,
         hasOrdered: PropTypes.bool,
@@ -75,6 +77,7 @@ export class Orders extends React.PureComponent {
                     closeAndSettle={this.props.closeAndSettle}
                     closingAndSettling={this.props.closingAndSettling}
                     addOrder={this.props.addOrder}
+                    removeItem={this.props.removeItem}
                     hasOrdered={this.props.hasOrdered}
                     isOrdering={this.props.isOrdering}
                     items={this.props.items}
@@ -103,6 +106,7 @@ const mapDispatchToProps = {
     acceptToBeHost,
     closeAndSettle,
     addOrder,
+    removeItem,
     loadItems,
     loadLatestOrder,
 }

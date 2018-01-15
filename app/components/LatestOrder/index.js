@@ -11,6 +11,7 @@ import {
     OrderCardHeader,
     OrderImg,
     OrderText,
+    OrderItemActions,
     OrderItemName,
     OrderItemOptions,
     OrderItemOptionSection,
@@ -29,21 +30,48 @@ const getOrderedItemOptionSection = optionSection => (
     </OrderItemOptionSection>
 )
 
-const getOrderedItem = (orderedItem, index, hasOrderShipped) => (
-    <OrderCard key={index}>
-        <OrderCardHeader>
-            <OrderImg src={orderedItem.getIn(['owner', 'picture'])} />
-            <OrderText>
-                {orderedItem.getIn(['owner', 'name'])}
-                {hasOrderShipped ? ` got` : ` is getting`}
-            </OrderText>
-        </OrderCardHeader>
-        <OrderItemName>{orderedItem.get('name')}</OrderItemName>
-        <OrderItemOptions>
-            {orderedItem.get('options').map(getOrderedItemOptionSection)}
-        </OrderItemOptions>
-    </OrderCard>
-)
+const getOrderedItem = (
+    orderedItem,
+    index,
+    hasOrderShipped,
+    currentUserId,
+    removeItem,
+    orderId,
+) => {
+    let orderActions = null
+    if (orderedItem.getIn(['owner', 'googleId']) === currentUserId) {
+        orderActions = (
+            <OrderItemActions
+                title="Remove ordered item"
+                onClick={() => {
+                    removeItem({
+                        orderId,
+                        itemId: orderedItem.get('id'),
+                    })
+                }}
+            >
+                <i className="fas fa-trash" />
+            </OrderItemActions>
+        )
+    }
+
+    return (
+        <OrderCard key={index}>
+            <OrderCardHeader>
+                <OrderImg src={orderedItem.getIn(['owner', 'picture'])} />
+                <OrderText>
+                    {orderedItem.getIn(['owner', 'name'])}
+                    {hasOrderShipped ? ` got` : ` is getting`}
+                </OrderText>
+                {orderActions}
+            </OrderCardHeader>
+            <OrderItemName>{orderedItem.get('name')}</OrderItemName>
+            <OrderItemOptions>
+                {orderedItem.get('options').map(getOrderedItemOptionSection)}
+            </OrderItemOptions>
+        </OrderCard>
+    )
+}
 
 const LatestOrder = ({
     acceptToBeHost,
@@ -51,6 +79,7 @@ const LatestOrder = ({
     addOrder,
     closeAndSettle,
     closingAndSettling,
+    removeItem,
     hasOrdered,
     isOrdering,
     items,
@@ -60,6 +89,8 @@ const LatestOrder = ({
     if (!order) return <LoadingSplash />
     const isCurrentUserHost =
         order.getIn(['host', 'googleId']) === currentUser.get('googleId')
+    const orderId = order.get('id')
+    const currentUserId = currentUser.get('googleId')
     const hasOrderShipped = order.getIn(['details', 'orderedAt']) !== null
     let addToOrderForm
     if (hasOrderShipped) {
@@ -100,7 +131,14 @@ const LatestOrder = ({
             {order
                 .get('orderedItems')
                 .map((orderedItem, index) =>
-                    getOrderedItem(orderedItem, index, hasOrderShipped),
+                    getOrderedItem(
+                        orderedItem,
+                        index,
+                        hasOrderShipped,
+                        currentUserId,
+                        removeItem,
+                        orderId,
+                    ),
                 )}
             {addToOrderForm}
         </LatestOrderContainer>
@@ -113,6 +151,7 @@ LatestOrder.propTypes = {
     addOrder: PropTypes.func.isRequired,
     closeAndSettle: PropTypes.func.isRequired,
     closingAndSettling: PropTypes.bool,
+    removeItem: PropTypes.func.isRequired,
     hasOrdered: PropTypes.bool,
     isOrdering: PropTypes.bool,
     items: PropTypes.object,
