@@ -1,13 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import messages from './PageLoading.messages'
+import LoadingSplash from '../LoadingSplash'
 
 const PageLoading = ({ error, pastDelay }) => {
     if (error) {
-        return <p>{messages.errorMessage}</p>
+        return <p>Error Loading Component</p>
     } else if (pastDelay) {
-        return <p>{messages.loadingMessage}</p>
+        return <LoadingSplash />
     }
     return null
 }
