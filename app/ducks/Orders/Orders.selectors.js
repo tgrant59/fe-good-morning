@@ -18,14 +18,22 @@ export const selectOrder = createSelector(
         }
         const orderedItems = latestOrder
             .get('orderedItems')
-            .map(orderedItem =>
-                orderedItem.set(
-                    'owner',
-                    usersState
-                        .getIn(['users', orderedItem.get('ownerId')])
-                        .set('googleId', orderedItem.get('ownerId')),
-                ),
-            )
+            .map(orderedItem => {
+                const orderedItemOwner = usersState.getIn([
+                    'users',
+                    orderedItem.get('ownerId'),
+                ])
+                if (orderedItemOwner) {
+                    return orderedItem.set(
+                        'owner',
+                        orderedItemOwner.set(
+                            'googleId',
+                            orderedItem.get('ownerId'),
+                        ),
+                    )
+                }
+                return orderedItem
+            })
         latestOrder = latestOrder.set('orderedItems', orderedItems)
         return latestOrder
     },
