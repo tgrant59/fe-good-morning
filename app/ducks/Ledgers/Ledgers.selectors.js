@@ -11,10 +11,9 @@ export const selectLedgers = createSelector(
         if (!ledgerState || !usersState) return null
         const ledgers = ledgerState.get('ledgers')
         if (!ledgers) return null
-        const ledgersWithUsers = ledgers.map(ledger => {
+        return ledgers.map(ledger => {
             const ledgerUser = usersState.getIn(['users', ledger.get('userId')])
             return ledger.set('user', ledgerUser)
         })
-        return ledgersWithUsers
     },
 )

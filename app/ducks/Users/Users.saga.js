@@ -9,7 +9,7 @@ import {
     loadUsersFailure,
 } from './Users.actions'
 
-export function* getLatestOrder(action) {
+export function* getUsers(action) {
     const token = yield select(selectToken)
     const requestURL = '/users'
 
@@ -30,5 +30,5 @@ export function* getLatestOrder(action) {
 }
 
 export default function* contentItemPackPreviewSagaWatcher() {
-    yield takeLatest(LOAD_USERS_REQUESTED, getLatestOrder)
+    yield takeLatest(LOAD_USERS_REQUESTED, getUsers)
 }

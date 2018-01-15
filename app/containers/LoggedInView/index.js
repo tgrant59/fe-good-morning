@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 import { connect } from 'react-redux'
+import { compose } from 'redux'
 import { Switch, Route } from 'react-router-dom'
 import { push } from 'react-router-redux'
 import styled from 'styled-components'
@@ -11,6 +12,10 @@ import Orders from 'containers/OrdersPage/Loadable'
 import Ledgers from 'containers/LedgersPage/Loadable'
 import routes from 'routes'
 import { colors } from 'styles'
+import injectSaga from '../../utils/injectSaga'
+import usersSaga from '../../ducks/Users/Users.saga'
+import usersReducer from '../../ducks/Users/Users.reducer'
+import injectReducer from '../../utils/injectReducer'
 
 const Container = styled.div`
     height: 100%;
@@ -77,6 +82,10 @@ const mapDispatchToProps = {
     redirect: push,
 }
 
-const withState = connect(mapStateToProps, mapDispatchToProps)
+const withState = compose(
+    injectReducer({ key: 'users', reducer: usersReducer }),
+    injectSaga({ key: 'users', saga: usersSaga }),
+    connect(mapStateToProps, mapDispatchToProps),
+)
 
 export default withState(LoggedInView)

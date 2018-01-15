@@ -26,8 +26,6 @@ import {
     selectHasOrdered,
     selectIsOrdering,
 } from 'ducks/Orders/Orders.selectors'
-import usersReducer from 'ducks/Users/Users.reducer'
-import usersSaga from 'ducks/Users/Users.saga'
 import injectReducer from 'utils/injectReducer'
 import injectSaga from 'utils/injectSaga'
 
@@ -114,10 +112,8 @@ const mapDispatchToProps = {
 const withState = compose(
     connect(mapStateToProps, mapDispatchToProps),
     injectReducer({ key: 'orders', reducer: ordersReducer }),
-    injectReducer({ key: 'users', reducer: usersReducer }),
     injectReducer({ key: 'items', reducer: itemsReducer }),
     injectSaga({ key: 'orders', saga: ordersSaga }),
-    injectSaga({ key: 'users', saga: usersSaga }),
     injectSaga({ key: 'items', saga: itemsSaga }),
 )
 

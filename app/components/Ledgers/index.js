@@ -14,14 +14,15 @@ import {
 
 const getLedger = (ledger, index) => {
     const user = ledger.get('user')
+    if (!user) return null
     const userName = user.get('name')
-    let ammount = parseFloat(ledger.get('iOweUserId'), 10)
+    let amount = parseFloat(ledger.get('iOweUserId'), 10)
     let owesMe = false
-    if (ammount < 0) {
+    if (amount < 0) {
         owesMe = true
-        ammount *= -1
+        amount *= -1
     }
-    ammount = ammount.toFixed(2)
+    amount = amount.toFixed(2)
 
     return (
         <LedgerCard key={index}>
@@ -30,7 +31,7 @@ const getLedger = (ledger, index) => {
                 <LedgerText>
                     {owesMe ? `${userName} owes you ` : `You owe ${userName} `}
                 </LedgerText>
-                <LedgerAmmount>{`$${ammount}`}</LedgerAmmount>
+                <LedgerAmmount>{`$${amount}`}</LedgerAmmount>
             </LedgerCardHeader>
         </LedgerCard>
     )
