@@ -29,6 +29,11 @@ export const OrderText = styled.span`
     font-size: 18px;
     margin-left: 60px;
 `
+export const OrderItemActions = styled.span`
+    float: right;
+    cursor: pointer;
+    color: red;
+`
 export const OrderItemName = styled.p`
     font-size: 18px;
     margin: 0 0 5px 60px;
