@@ -4,6 +4,7 @@ import React from 'react'
 import {
     HostingCard,
     HostingCardHeader,
+    HostButtonContainer,
     HostImg,
     HostTextContainer,
     HostText,
@@ -153,7 +154,9 @@ class OrderDetails extends React.Component {
                         <HostText>{this.getHostText()}</HostText>
                         <HostSubText>{this.getHostSubText()}</HostSubText>
                     </HostTextContainer>
-                    {this.getHostButton()}
+                    <HostButtonContainer>
+                        {this.getHostButton()}
+                    </HostButtonContainer>
                 </HostingCardHeader>
             </HostingCard>
         )
