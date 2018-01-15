@@ -42,11 +42,7 @@ class OrderDetails extends React.Component {
         } = this.props
 
         if (hasOrderShipped) {
-            return (
-                <span>
-                    <i className="fas fa-ship fa-lg" />&nbsp;
-                </span>
-            )
+            return null
         }
 
         if (!hasHostAccepted) {
@@ -95,12 +91,7 @@ class OrderDetails extends React.Component {
             return <span>{message}</span>
         }
 
-        return (
-            <span>
-                Place your order, now! &nbsp;
-                <i className="fas fa-cart-arrow-down" />
-            </span>
-        )
+        return <span>Place your order, now!</span>
     }
 
     getHostSubText = () => {
