@@ -7,7 +7,7 @@ import {
 } from './Ledgers.actions'
 
 export const initialState = Immutable.fromJS({
-    ledgers: new Immutable.Map(),
+    ledgers: null,
 })
 
 const ledgersReducer = (state = initialState, action) => {
@@ -15,9 +15,10 @@ const ledgersReducer = (state = initialState, action) => {
         case LOAD_LEDGERS_REQUESTED:
             return state
         case LOAD_LEDGERS_SUCCESS:
-            return state.merge({
-                ledgers: Immutable.fromJS(action.payload.ledgers),
-            })
+            return state.set(
+                'ledgers',
+                Immutable.fromJS(action.payload.ledgers),
+            )
         case LOAD_LEDGERS_FAILURE:
             return state
         default:
