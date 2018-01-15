@@ -20,8 +20,8 @@ const getLedger = (ledger, index) => {
     if (ammount < 0) {
         owesMe = true
         ammount *= -1
-        ammount = ammount.toFixed(2)
     }
+    ammount = ammount.toFixed(2)
 
     return (
         <LedgerCard key={index}>
