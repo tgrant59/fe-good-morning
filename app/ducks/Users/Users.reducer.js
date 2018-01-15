@@ -18,7 +18,7 @@ const setNewUserMap = (userMap, newUsers) => {
     return users
 }
 
-const loginReducer = (state = initialState, action) => {
+const usersReducer = (state = initialState, action) => {
     switch (action.type) {
         case LOAD_USERS_REQUESTED:
             return state
@@ -33,4 +33,4 @@ const loginReducer = (state = initialState, action) => {
     }
 }
 
-export default loginReducer
+export default usersReducer

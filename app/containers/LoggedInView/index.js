@@ -7,6 +7,7 @@ import styled from 'styled-components'
 
 import NavBar from 'components/NavBar'
 import Orders from 'containers/OrdersPage/Loadable'
+import Ledgers from 'containers/LedgersPage/Loadable'
 import routes from 'routes'
 import { colors } from '../../styles'
 
@@ -50,6 +51,11 @@ export class LoggedInView extends React.PureComponent {
                 <MainContainer>
                     <Switch>
                         <Route exact path={routes.ORDERS} component={Orders} />
+                        <Route
+                            exact
+                            path={routes.LEDGERS}
+                            component={Ledgers}
+                        />
                     </Switch>
                     <Footer />
                 </MainContainer>
