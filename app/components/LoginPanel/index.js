@@ -2,7 +2,9 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import styled from 'styled-components'
 
+import Banana from 'components/Banana'
 import { colors } from 'styles'
+
 import GoogleLoginButton from './GoogleLoginButton'
 
 export const LoginPanelContainer = styled.div`
@@ -36,8 +38,8 @@ class LoginPanel extends React.PureComponent {
         return (
             <LoginPanelContainer>
                 <LoginTitle>
-                    <i className="fas fa-utensils fa-lg" />&nbsp; Good Morning,
-                    TopHat! 🍌
+                    <Banana />
+                    <span>&nbsp; Good Morning, Top Hat!</span>
                 </LoginTitle>
                 <GoogleLoginButton
                     clientId="979241073886-66fsr3mmbnsi2bvfs6n8d380nh1o4tpd.apps.googleusercontent.com"
