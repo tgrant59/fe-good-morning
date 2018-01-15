@@ -28,6 +28,7 @@ class OrderDetails extends React.Component {
         hostName: PropTypes.string.isRequired,
         hostPicture: PropTypes.string.isRequired,
         numOrders: PropTypes.number.isRequired,
+        numOfMyOrders: PropTypes.number.isRequired,
         onShowOrders: PropTypes.func.isRequired,
         orderId: PropTypes.string.isRequired,
     }
@@ -78,6 +79,7 @@ class OrderDetails extends React.Component {
             hasHostAccepted,
             hasOrderShipped,
             isCurrentUserHost,
+            numOfMyOrders,
         } = this.props
 
         if (hasOrderShipped) {
@@ -89,6 +91,17 @@ class OrderDetails extends React.Component {
                 ? `You need to accept this order!`
                 : `This order needs a host!`
             return <span>{message}</span>
+        }
+
+        if (numOfMyOrders > 0) {
+            if (numOfMyOrders > 1) {
+                return (
+                    <span>
+                        You have <strong>{numOfMyOrders} orders</strong> in
+                    </span>
+                )
+            }
+            return <span>You have your order in, feel free to add another</span>
         }
 
         return <span>Place your order, now!</span>

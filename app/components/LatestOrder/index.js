@@ -123,6 +123,21 @@ class LatestOrder extends React.PureComponent {
         const currentUserId = this.props.currentUser.get('googleId')
         const hasOrderShipped =
             this.props.order.getIn(['details', 'orderedAt']) !== null
+        let numOfMyOrders = 0
+        if (this.props.order.get('orderedItems')) {
+            numOfMyOrders = this.props.order
+                .get('orderedItems')
+                .reduce((myTotalOrders, orderedItem) => {
+                    if (
+                        orderedItem.getIn(['owner', 'googleId']) ===
+                        currentUserId
+                    ) {
+                        return myTotalOrders + 1
+                    }
+                    return myTotalOrders
+                }, 0)
+        }
+
         let addToOrderForm
         if (hasOrderShipped) {
             addToOrderForm = (
@@ -165,6 +180,7 @@ class LatestOrder extends React.PureComponent {
                         '',
                     )}
                     numOrders={this.props.order.get('orderedItems').size}
+                    numOfMyOrders={numOfMyOrders}
                     onShowOrders={this.toggleOrders}
                     orderId={this.props.order.get('id')}
                 />
