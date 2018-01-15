@@ -1,19 +1,12 @@
 import styled from 'styled-components'
 
-// body {
-// background-color: #ffde6b;
-// height: 100vh;
-// width: 100vw;
-// overflow: hidden;
-// }
-
 export const LoadingSplashContainer = styled.div`
     #cooking {
         position: relative;
         margin: 0 auto;
         top: 0;
-        width: 75vh;
-        height: 75vh;
+        width: 300px;
+        height: 300px;
         overflow: hidden;
     }
     #cooking .bubble {
