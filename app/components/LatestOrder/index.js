@@ -41,7 +41,10 @@ const getOrderedItem = (
     orderId,
 ) => {
     let orderActions = null
-    if (orderedItem.getIn(['owner', 'googleId']) === currentUserId) {
+    if (
+        orderedItem.getIn(['owner', 'googleId']) === currentUserId &&
+        !hasOrderShipped
+    ) {
         orderActions = (
             <OrderItemActions
                 title="Remove ordered item"
