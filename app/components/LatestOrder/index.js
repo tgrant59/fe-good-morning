@@ -9,6 +9,7 @@ import {
     LatestOrderContainer,
     OrderCard,
     OrderCardHeader,
+    OrderContent,
     OrderImg,
     OrderText,
     OrderItemActions,
@@ -33,6 +34,7 @@ const getOrderedItemOptionSection = optionSection => (
 const getOrderedItem = (
     orderedItem,
     index,
+    isShowingOrders,
     hasOrderShipped,
     currentUserId,
     removeItem,
@@ -56,114 +58,130 @@ const getOrderedItem = (
     }
 
     return (
-        <OrderCard key={index}>
-            <OrderCardHeader>
-                <OrderImg src={orderedItem.getIn(['owner', 'picture'])} />
-                <OrderText>
-                    {orderedItem.getIn(['owner', 'name'])}
-                    {hasOrderShipped ? ` got` : ` is getting`}
-                </OrderText>
-                {orderActions}
-            </OrderCardHeader>
-            <OrderItemName>{orderedItem.get('name')}</OrderItemName>
-            <OrderItemOptions>
-                {orderedItem.get('options').map(getOrderedItemOptionSection)}
-            </OrderItemOptions>
+        <OrderCard key={index} index={index} isShowingOrders={isShowingOrders}>
+            <OrderContent isShowingOrders={isShowingOrders}>
+                <OrderCardHeader>
+                    <OrderImg src={orderedItem.getIn(['owner', 'picture'])} />
+                    <OrderText>
+                        {orderedItem.getIn(['owner', 'name'])}
+                        {hasOrderShipped ? ` got` : ` is getting`}
+                    </OrderText>
+                    {orderActions}
+                </OrderCardHeader>
+                <OrderItemName>{orderedItem.get('name')}</OrderItemName>
+                <OrderItemOptions>
+                    {orderedItem
+                        .get('options')
+                        .map(getOrderedItemOptionSection)}
+                </OrderItemOptions>
+            </OrderContent>
         </OrderCard>
     )
 }
 
-const LatestOrder = ({
-    acceptToBeHost,
-    acceptingTobeHost,
-    addOrder,
-    closeAndSettle,
-    closingAndSettling,
-    removeItem,
-    hasOrdered,
-    isOrdering,
-    items,
-    order,
-    currentUser,
-}) => {
-    if (!order) return <LoadingSplash />
-    const isCurrentUserHost =
-        order.getIn(['host', 'googleId']) === currentUser.get('googleId')
-    const orderId = order.get('id')
-    const currentUserId = currentUser.get('googleId')
-    const hasOrderShipped = order.getIn(['details', 'orderedAt']) !== null
-    let addToOrderForm
-    if (hasOrderShipped) {
-        addToOrderForm = (
-            <OrderShippedSection>
-                Today&#8217;s order has finished, there&#8217;s always tomorrow!
-                🍌
-            </OrderShippedSection>
-        )
-    } else {
-        addToOrderForm = (
-            <div>
-                <AddOrderHeader>Add to Order</AddOrderHeader>
-                <AddOrderForm
-                    hasOrdered={hasOrdered}
-                    isOrdering={isOrdering}
-                    addOrder={addOrder}
-                    items={items}
-                />
-            </div>
-        )
+class LatestOrder extends React.PureComponent {
+    static propTypes = {
+        acceptToBeHost: PropTypes.func.isRequired,
+        acceptingTobeHost: PropTypes.bool,
+        addOrder: PropTypes.func.isRequired,
+        closeAndSettle: PropTypes.func.isRequired,
+        closingAndSettling: PropTypes.bool,
+        removeItem: PropTypes.func.isRequired,
+        hasOrdered: PropTypes.bool,
+        isOrdering: PropTypes.bool,
+        items: PropTypes.object,
+        order: PropTypes.object,
+        currentUser: PropTypes.object,
     }
 
-    return (
-        <LatestOrderContainer>
-            <OrderDetails
-                acceptToBeHost={acceptToBeHost}
-                acceptingTobeHost={acceptingTobeHost}
-                closeAndSettle={closeAndSettle}
-                closingAndSettling={closingAndSettling}
-                isCurrentUserHost={isCurrentUserHost}
-                hasHostAccepted={order.getIn(['details', 'accepted'])}
-                hasOrderShipped={hasOrderShipped}
-                hostName={order.getIn(['host', 'name'], '')}
-                hostPicture={order.getIn(['host', 'picture'], '')}
-                orderId={order.get('id')}
-            />
-            {order
-                .get('orderedItems')
-                .map((orderedItem, index) =>
-                    getOrderedItem(
-                        orderedItem,
-                        index,
-                        hasOrderShipped,
-                        currentUserId,
-                        removeItem,
-                        orderId,
-                    ),
-                )}
-            {addToOrderForm}
-        </LatestOrderContainer>
-    )
-}
+    static defaultProps = {
+        acceptingTobeHost: false,
+        closingAndSettling: false,
+        hasOrdered: false,
+        isOrdering: false,
+    }
 
-LatestOrder.propTypes = {
-    acceptToBeHost: PropTypes.func.isRequired,
-    acceptingTobeHost: PropTypes.bool,
-    addOrder: PropTypes.func.isRequired,
-    closeAndSettle: PropTypes.func.isRequired,
-    closingAndSettling: PropTypes.bool,
-    removeItem: PropTypes.func.isRequired,
-    hasOrdered: PropTypes.bool,
-    isOrdering: PropTypes.bool,
-    items: PropTypes.object,
-    order: PropTypes.object,
-    currentUser: PropTypes.object,
-}
+    state = {
+        isShowingOrders: false,
+    }
 
-LatestOrder.defaultProps = {
-    acceptingTobeHost: false,
-    closingAndSettling: false,
-    hasOrdered: false,
-    isOrdering: false,
+    toggleOrders = () => {
+        this.setState({
+            isShowingOrders: !this.state.isShowingOrders,
+        })
+    }
+
+    render() {
+        if (!this.props.order) return <LoadingSplash />
+        const isCurrentUserHost =
+            this.props.order.getIn(['host', 'googleId']) ===
+            this.props.currentUser.get('googleId')
+        const orderId = this.props.order.get('id')
+        const currentUserId = this.props.currentUser.get('googleId')
+        const hasOrderShipped =
+            this.props.order.getIn(['details', 'orderedAt']) !== null
+        let addToOrderForm
+        if (hasOrderShipped) {
+            addToOrderForm = (
+                <OrderShippedSection>
+                    Today&#8217;s order has finished, there&#8217;s always
+                    tomorrow! 🍌
+                </OrderShippedSection>
+            )
+        } else {
+            addToOrderForm = (
+                <div>
+                    <AddOrderHeader>Add to Order</AddOrderHeader>
+                    <AddOrderForm
+                        hasOrdered={this.props.hasOrdered}
+                        isOrdering={this.props.isOrdering}
+                        addOrder={this.props.addOrder}
+                        items={this.props.items}
+                    />
+                </div>
+            )
+        }
+
+        return (
+            <LatestOrderContainer>
+                <OrderDetails
+                    acceptToBeHost={this.props.acceptToBeHost}
+                    acceptingTobeHost={this.props.acceptingTobeHost}
+                    closeAndSettle={this.props.closeAndSettle}
+                    closingAndSettling={this.props.closingAndSettling}
+                    isCurrentUserHost={isCurrentUserHost}
+                    isShowingOrders={this.state.isShowingOrders}
+                    hasHostAccepted={this.props.order.getIn([
+                        'details',
+                        'accepted',
+                    ])}
+                    hasOrderShipped={hasOrderShipped}
+                    hostName={this.props.order.getIn(['host', 'name'], '')}
+                    hostPicture={this.props.order.getIn(
+                        ['host', 'picture'],
+                        '',
+                    )}
+                    numOrders={this.props.order.get('orderedItems').size}
+                    onShowOrders={this.toggleOrders}
+                    orderId={this.props.order.get('id')}
+                />
+                {this.props.order
+                    .get('orderedItems')
+                    .map((orderedItem, index) =>
+                        getOrderedItem(
+                            orderedItem,
+                            index,
+                            this.state.isShowingOrders,
+                            hasOrderShipped,
+                            currentUserId,
+                            this.props.removeItem,
+                            orderId,
+                        ),
+                    )}
+                {addToOrderForm}
+            </LatestOrderContainer>
+        )
+    }
 }
 
 export default LatestOrder

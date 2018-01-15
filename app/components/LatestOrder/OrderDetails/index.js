@@ -11,6 +11,8 @@ import {
     HostSubText,
     HostButton,
     CloseAndSettleButton,
+    ShowOrdersButton,
+    ShowOrdersIcon,
 } from './OrderDetails.styles'
 
 class OrderDetails extends React.Component {
@@ -20,10 +22,13 @@ class OrderDetails extends React.Component {
         closeAndSettle: PropTypes.func.isRequired,
         closingAndSettling: PropTypes.bool.isRequired,
         isCurrentUserHost: PropTypes.bool.isRequired,
+        isShowingOrders: PropTypes.bool.isRequired,
         hasHostAccepted: PropTypes.bool.isRequired,
         hasOrderShipped: PropTypes.bool.isRequired,
         hostName: PropTypes.string.isRequired,
         hostPicture: PropTypes.string.isRequired,
+        numOrders: PropTypes.number.isRequired,
+        onShowOrders: PropTypes.func.isRequired,
         orderId: PropTypes.string.isRequired,
     }
 
@@ -109,7 +114,7 @@ class OrderDetails extends React.Component {
         if (!hasHostAccepted) {
             return isCurrentUserHost
                 ? `${hostName}, come on mate`
-                : `${hostName} is AWOL, I know you want to host this banana 😉`
+                : `${hostName} is AWOL. Step up and host the order instead! Be the change you want to see in the world 😉`
         }
 
         if (hasOrderShipped) {
@@ -119,7 +124,7 @@ class OrderDetails extends React.Component {
         }
 
         return isCurrentUserHost
-            ? `You are hosting this order, when you're done click 'Close and Settle' to Close this order, and settle ledgers`
+            ? `You are hosting this order. When you've ordered, click 'Close and Settle' to close the order and settle the ledger`
             : `${hostName} is hosting this order`
     }
 
@@ -133,8 +138,28 @@ class OrderDetails extends React.Component {
         closeAndSettle({ orderId })
     }
 
+    showOrdersButton = (isShowingOrders, onShowOrdersClick) => {
+        const message = isShowingOrders ? 'Hide Orders' : 'Show Orders'
+        return (
+            <ShowOrdersButton onClick={onShowOrdersClick}>
+                {message}
+                <ShowOrdersIcon hide={!isShowingOrders}>
+                    <i className="fas fa-caret-up" />
+                </ShowOrdersIcon>
+                <ShowOrdersIcon hide={isShowingOrders}>
+                    <i className="fas fa-caret-down" />
+                </ShowOrdersIcon>
+            </ShowOrdersButton>
+        )
+    }
+
     render() {
-        const { hostPicture } = this.props
+        const {
+            hostPicture,
+            isShowingOrders,
+            onShowOrders,
+            numOrders,
+        } = this.props
 
         return (
             <HostingCard key="host">
@@ -148,6 +173,9 @@ class OrderDetails extends React.Component {
                         {this.getHostButton()}
                     </HostButtonContainer>
                 </HostingCardHeader>
+                {numOrders > 0
+                    ? this.showOrdersButton(isShowingOrders, onShowOrders)
+                    : null}
             </HostingCard>
         )
     }
