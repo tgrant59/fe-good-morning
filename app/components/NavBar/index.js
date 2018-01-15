@@ -103,7 +103,6 @@ const NavBar = ({ user }) => (
         <Spacer />
         <NavItem to={routes.ORDERS}>Today</NavItem>
         <NavItem to={routes.ORDERS}>Ledger</NavItem>
-        <NavItem to={routes.ORDERS}>History</NavItem>
         <UserNavItem onClick={signOut} title="Click here to signout">
             <IMG src={user ? user.get('imageUrl') : null} />
             <Name>{user ? user.get('name') : null}</Name>
