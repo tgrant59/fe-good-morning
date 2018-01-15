@@ -80,24 +80,14 @@ class OrderDetails extends React.Component {
         } = this.props
 
         if (hasOrderShipped) {
-            return (
-                <span>
-                    This order has already shipped! &nbsp;
-                    <i className="fas fa-ship" />
-                </span>
-            )
+            return <span>This order has already shipped!</span>
         }
 
         if (!hasHostAccepted) {
             const message = isCurrentUserHost
                 ? `You need to accept this order!`
                 : `This order needs a host!`
-            return (
-                <span>
-                    {message} &nbsp;
-                    <i className="fas fa-user" />
-                </span>
-            )
+            return <span>{message}</span>
         }
 
         return (

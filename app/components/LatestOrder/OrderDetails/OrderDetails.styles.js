@@ -15,6 +15,7 @@ export const HostingCard = Card.extend`
 `
 export const HostingCardHeader = CardHeader.extend`
     flex-wrap: wrap;
+    justify-content: center;
     min-height: 60px;
 `
 export const HostButtonContainer = styled.div`
@@ -30,7 +31,7 @@ export const HostTextContainer = styled.span`
     flex: 1 0;
     font-size: 20px;
     margin-left: 20px;
-    min-width: 150px;
+    min-width: 180px;
 `
 export const HostText = styled.div`
     font-size: 20px;
