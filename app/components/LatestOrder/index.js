@@ -65,7 +65,8 @@ const LatestOrder = ({
     if (hasOrderShipped) {
         addToOrderForm = (
             <OrderShippedSection>
-                Todays order has finished, there&#8217;s always tomorrow! 🍌
+                Today&#8217;s order has finished, there&#8217;s always tomorrow!
+                🍌
             </OrderShippedSection>
         )
     } else {
