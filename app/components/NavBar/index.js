@@ -30,7 +30,7 @@ const NavBar = ({ user }) => (
         </LogoNavItem>
         <Spacer />
         <NavItem to={routes.ORDERS}>Today</NavItem>
-        <NavItem to={routes.ORDERS}>Ledger</NavItem>
+        <NavItem to={routes.LEDGERS}>Ledgers</NavItem>
         <UserNavItem onClick={signOut} title="Click here to signout">
             <UserImg src={user ? user.get('imageUrl') : null} />
             <Name>{user ? user.get('name') : null}</Name>
