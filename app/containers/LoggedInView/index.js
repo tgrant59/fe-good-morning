@@ -5,6 +5,8 @@ import { Switch, Route } from 'react-router-dom'
 import { push } from 'react-router-redux'
 import styled from 'styled-components'
 
+import { loadUsers } from 'ducks/Users/Users.actions'
+
 import NavBar from 'components/NavBar'
 import Orders from 'containers/OrdersPage/Loadable'
 import Ledgers from 'containers/LedgersPage/Loadable'
@@ -33,21 +35,29 @@ const Footer = styled.div`
 export class LoggedInView extends React.PureComponent {
     static propTypes = {
         user: PropTypes.object,
+        userFromOurDB: PropTypes.object,
+        loadUsers: PropTypes.func.isRequired,
         redirect: PropTypes.func.isRequired,
     }
 
     static defaultPropTypes = {
         user: null,
+        userFromOurDB: null,
     }
 
     componentDidMount() {
         if (!this.props.user) this.props.redirect(routes.LOGIN)
+        if (this.props.user) {
+            if (this.props.user.get('googleId')) {
+                this.props.loadUsers([this.props.user.get('googleId')])
+            }
+        }
     }
 
     render() {
         return (
             <Container>
-                <NavBar user={this.props.user} />
+                <NavBar user={this.props.userFromOurDB} />
                 <MainContainer>
                     <Switch>
                         <Route exact path={routes.ORDERS} component={Orders} />
@@ -66,13 +76,19 @@ export class LoggedInView extends React.PureComponent {
 
 const mapStateToProps = state => {
     const loginState = state.get('login')
+    const userState = state.get('users')
+    const user = loginState ? loginState.get('user') : null
     return {
-        user: loginState ? loginState.get('user') : null,
+        user,
+        userFromOurDB: userState
+            ? userState.getIn(['users', user.get('googleId')], null)
+            : null,
     }
 }
 
 const mapDispatchToProps = {
     redirect: push,
+    loadUsers,
 }
 
 const withState = connect(mapStateToProps, mapDispatchToProps)
