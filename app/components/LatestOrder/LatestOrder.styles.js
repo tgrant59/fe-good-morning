@@ -1,7 +1,13 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 import { typography } from 'styles'
 import { Card, CardHeader } from 'components/Card/Card.styles'
+
+const hiddenOrderedCard = css`
+    max-height: 20px;
+    margin-top: -30px;
+    padding-top: 20px;
+`
 
 export const LatestOrderContainer = styled.div`
     text-align: center;
@@ -9,11 +15,20 @@ export const LatestOrderContainer = styled.div`
 
 export const OrderCard = Card.extend`
     max-width: calc(80% - 20px);
-    z-index: 199;
+    overflow: hidden;
+    position: relative;
+    max-height: 1000px;
+    transition: all 0.4s ease-in-out;
+    z-index: ${props => 199 - props.index};
+    ${props => (!props.isShowingOrders ? hiddenOrderedCard : null)};
 
     @media (max-width: 600px) {
         max-width: calc(100% - 20px);
     }
+`
+export const OrderContent = styled.div`
+    transition: opacity 0.4s ease-in-out;
+    opacity: ${props => (props.isShowingOrders ? 1 : 0)};
 `
 export const OrderCardHeader = CardHeader.extend`
     min-height: 40px;

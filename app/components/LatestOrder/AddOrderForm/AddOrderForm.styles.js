@@ -28,5 +28,5 @@ export const AddOptionSection = styled.div`
 `
 export const AddButton = Button.extend`
     margin-top: 20px;
-    width: 100%;
+    width: calc(100% - 20px);
 `

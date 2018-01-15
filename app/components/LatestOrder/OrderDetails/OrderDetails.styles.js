@@ -7,6 +7,7 @@ import { Card, CardHeader } from 'components/Card/Card.styles'
 
 export const HostingCard = Card.extend`
     max-width: 80%;
+    position: relative;
     z-index: 200;
 
     @media (max-width: 600px) {
@@ -46,4 +47,13 @@ export const HostButton = ButtonWithWiggle.extend`
 export const CloseAndSettleButton = ButtonWithWiggle.extend`
     font-size: 15px;
     background-color: ${colors.theme.PURPLE};
+`
+export const ShowOrdersButton = styled.div`
+    cursor: pointer;
+    font-size: 18px;
+    margin-top: 20px;
+`
+export const ShowOrdersIcon = styled.div`
+    display: ${props => (props.hide ? 'none' : 'inline-block')};
+    margin-left: 6px;
 `
