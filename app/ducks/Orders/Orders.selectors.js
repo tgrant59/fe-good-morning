@@ -21,7 +21,9 @@ export const selectOrder = createSelector(
             .map(orderedItem =>
                 orderedItem.set(
                     'owner',
-                    usersState.getIn(['users', orderedItem.get('ownerId')]),
+                    usersState
+                        .getIn(['users', orderedItem.get('ownerId')])
+                        .set('googleId', orderedItem.get('ownerId')),
                 ),
             )
         latestOrder = latestOrder.set('orderedItems', orderedItems)
