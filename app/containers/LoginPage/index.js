@@ -5,6 +5,7 @@ import { push } from 'react-router-redux'
 import { compose } from 'redux'
 import styled from 'styled-components'
 
+import MadeWithLove from 'components/MadeWithLove'
 import LoginPanel from 'components/LoginPanel'
 import routes from 'routes'
 import injectReducer from 'utils/injectReducer'
@@ -51,6 +52,7 @@ export class Login extends React.PureComponent {
                     onGoogleSuccess={this.onLoginSuccess}
                     isErrored={this.props.isErrored}
                 />
+                <MadeWithLove />
             </PageContainer>
         )
     }

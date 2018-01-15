@@ -1,4 +1,4 @@
-import { call, put, select, takeLatest } from 'redux-saga/effects'
+import { call, put, select, takeEvery } from 'redux-saga/effects'
 
 import { selectToken } from 'ducks/Login/Login.selectors'
 import backend from 'helpers/backend'
@@ -9,7 +9,7 @@ import {
     loadUsersFailure,
 } from './Users.actions'
 
-export function* getLatestOrder(action) {
+export function* getUsers(action) {
     const token = yield select(selectToken)
     const requestURL = '/users'
 
@@ -30,5 +30,5 @@ export function* getLatestOrder(action) {
 }
 
 export default function* contentItemPackPreviewSagaWatcher() {
-    yield takeLatest(LOAD_USERS_REQUESTED, getLatestOrder)
+    yield takeEvery(LOAD_USERS_REQUESTED, getUsers)
 }

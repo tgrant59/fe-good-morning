@@ -1,6 +1,7 @@
 import { call, put, select, takeLatest } from 'redux-saga/effects'
 
 import { selectToken } from 'ducks/Login/Login.selectors'
+import { loadUsers } from 'ducks/Users/Users.actions'
 import backend from 'helpers/backend'
 
 import {
@@ -18,6 +19,8 @@ export function* getLedgers() {
         if (response.status >= 400) {
             yield put(loadLedgersFailure(response.data))
         } else {
+            const userIds = response.data.map(ledger => ledger.userId)
+            yield put(loadUsers(userIds))
             yield put(loadLedgersSuccess(response.data))
         }
     } catch (error) {

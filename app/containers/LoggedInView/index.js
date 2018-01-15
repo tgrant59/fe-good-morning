@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 import { connect } from 'react-redux'
+import { compose } from 'redux'
 import { Switch, Route } from 'react-router-dom'
 import { push } from 'react-router-redux'
 import styled from 'styled-components'
@@ -8,10 +9,15 @@ import styled from 'styled-components'
 import { loadUsers } from 'ducks/Users/Users.actions'
 
 import NavBar from 'components/NavBar'
+import MadeWithLove from 'components/MadeWithLove'
 import Orders from 'containers/OrdersPage/Loadable'
 import Ledgers from 'containers/LedgersPage/Loadable'
 import routes from 'routes'
-import { colors } from '../../styles'
+import { colors } from 'styles'
+import injectSaga from '../../utils/injectSaga'
+import usersSaga from '../../ducks/Users/Users.saga'
+import usersReducer from '../../ducks/Users/Users.reducer'
+import injectReducer from '../../utils/injectReducer'
 
 const Container = styled.div`
     height: 100%;
@@ -68,6 +74,7 @@ export class LoggedInView extends React.PureComponent {
                         />
                     </Switch>
                     <Footer />
+                    <MadeWithLove />
                 </MainContainer>
             </Container>
         )
@@ -78,11 +85,14 @@ const mapStateToProps = state => {
     const loginState = state.get('login')
     const userState = state.get('users')
     const user = loginState ? loginState.get('user') : null
+    let userFromOurDB = null
+    if (userState && user) {
+        userFromOurDB = userState.getIn(['users', user.get('googleId')], null)
+    }
+
     return {
         user,
-        userFromOurDB: userState
-            ? userState.getIn(['users', user.get('googleId')], null)
-            : null,
+        userFromOurDB,
     }
 }
 
@@ -91,6 +101,10 @@ const mapDispatchToProps = {
     loadUsers,
 }
 
-const withState = connect(mapStateToProps, mapDispatchToProps)
+const withState = compose(
+    injectReducer({ key: 'users', reducer: usersReducer }),
+    injectSaga({ key: 'users', saga: usersSaga }),
+    connect(mapStateToProps, mapDispatchToProps),
+)
 
 export default withState(LoggedInView)

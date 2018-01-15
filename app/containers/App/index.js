@@ -1,7 +1,6 @@
 import React from 'react'
 import { Helmet } from 'react-helmet'
 import { Switch, Route } from 'react-router-dom'
-import styled from 'styled-components'
 
 import LogErrors from 'containers/LogErrors'
 import Login from 'containers/LoginPage/Loadable'
@@ -13,13 +12,7 @@ import injectSaga from 'utils/injectSaga'
 
 import messages from './App.messages'
 import saga from './App.saga'
-
-const AppWrapper = styled.div`
-    height: 100%;
-    padding: 0;
-    position: fixed;
-    width: 100%;
-`
+import { AppWrapper } from './App.styles'
 
 export function App() {
     return (

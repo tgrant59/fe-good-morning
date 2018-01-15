@@ -9,5 +9,6 @@ exports[`<NotFoundPage /> should match shapshot 1`] = `
   >
     Back to App
   </a>
+  <MadeWithLove />
 </p>
 `;
