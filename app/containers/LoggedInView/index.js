@@ -5,11 +5,12 @@ import { Switch, Route } from 'react-router-dom'
 import { push } from 'react-router-redux'
 import styled from 'styled-components'
 
+import MadeWithLove from 'components/MadeWithLove'
 import NavBar from 'components/NavBar'
 import Orders from 'containers/OrdersPage/Loadable'
 import Ledgers from 'containers/LedgersPage/Loadable'
 import routes from 'routes'
-import { colors } from '../../styles'
+import { colors } from 'styles'
 
 const Container = styled.div`
     height: 100%;
@@ -58,6 +59,7 @@ export class LoggedInView extends React.PureComponent {
                         />
                     </Switch>
                     <Footer />
+                    <MadeWithLove />
                 </MainContainer>
             </Container>
         )

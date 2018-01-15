@@ -2,14 +2,10 @@
 
 exports[`<PageLoading /> should match snapshot 1`] = `""`;
 
-exports[`<PageLoading /> should match snapshot when past delay 1`] = `
-<p>
-  PageLoading - Steeping Tea...
-</p>
-`;
+exports[`<PageLoading /> should match snapshot when past delay 1`] = `<LoadingSplash />`;
 
 exports[`<PageLoading /> should match snapshot when there is an error 1`] = `
 <p>
-  PageLoading - Error Loading Component
+  Error Loading Component
 </p>
 `;
