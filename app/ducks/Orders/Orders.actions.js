@@ -7,6 +7,10 @@ export const LOAD_LATEST_ORDER_FAILURE =
 export const ADD_ORDER_REQUESTED = 'fe-good-morning/Orders/ADD_ORDER_REQUESTED'
 export const ADD_ORDER_SUCCESS = 'fe-good-morning/Orders/ADD_ORDER_SUCCESS'
 export const ADD_ORDER_FAILURE = 'fe-good-morning/Orders/ADD_ORDER_FAILURE'
+export const REMOVE_ITEM_REQUESTED =
+    'fe-good-morning/Orders/REMOVE_ITEM_REQUESTED'
+export const REMOVE_ITEM_SUCCESS = 'fe-good-morning/Orders/REMOVE_ITEM_SUCCESS'
+export const REMOVE_ITEM_FAILURE = 'fe-good-morning/Orders/REMOVE_ITEM_FAILURE'
 export const ACCEPT_TO_BE_HOST_REQUESTED =
     'fe-good-morning/Orders/ACCEPT_TO_BE_HOST_REQUESTED'
 export const ACCEPT_TO_BE_HOST_SUCCESS =
@@ -45,6 +49,19 @@ export const addOrderSuccess = () => ({
 export const addOrderFailure = error => ({
     type: ADD_ORDER_FAILURE,
     payload: { error },
+})
+
+export const removeItem = ({ orderId, itemId }) => ({
+    type: REMOVE_ITEM_REQUESTED,
+    payload: { orderId, itemId },
+})
+export const removeItemSuccess = ({ orderId, itemId }) => ({
+    type: REMOVE_ITEM_SUCCESS,
+    payload: { orderId, itemId },
+})
+export const removeItemFailure = ({ orderId, itemId }) => ({
+    type: REMOVE_ITEM_FAILURE,
+    payload: { orderId, itemId },
 })
 
 export const acceptToBeHost = ({ orderId, isCurrentUserHost }) => ({

@@ -30,9 +30,9 @@ export const OrderText = styled.span`
     margin-left: 60px;
 `
 export const OrderItemActions = styled.span`
-    float: right;
+    flex: 1;
+    text-align: right;
     cursor: pointer;
-    color: red;
 `
 export const OrderItemName = styled.p`
     font-size: 18px;

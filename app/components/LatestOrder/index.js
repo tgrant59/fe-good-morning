@@ -30,10 +30,29 @@ const getOrderedItemOptionSection = optionSection => (
     </OrderItemOptionSection>
 )
 
-const getOrderedItem = (orderedItem, index, hasOrderShipped, currentUserId) => {
+const getOrderedItem = (
+    orderedItem,
+    index,
+    hasOrderShipped,
+    currentUserId,
+    removeItem,
+    orderId,
+) => {
     let orderActions = null
     if (orderedItem.getIn(['owner', 'googleId']) === currentUserId) {
-        orderActions = <OrderItemActions>Remove</OrderItemActions>
+        orderActions = (
+            <OrderItemActions
+                title="Remove ordered item"
+                onClick={() => {
+                    removeItem({
+                        orderId,
+                        itemId: orderedItem.get('id'),
+                    })
+                }}
+            >
+                <i className="fas fa-trash" />
+            </OrderItemActions>
+        )
     }
 
     return (
@@ -44,10 +63,9 @@ const getOrderedItem = (orderedItem, index, hasOrderShipped, currentUserId) => {
                     {orderedItem.getIn(['owner', 'name'])}
                     {hasOrderShipped ? ` got` : ` is getting`}
                 </OrderText>
+                {orderActions}
             </OrderCardHeader>
-            <OrderItemName>
-                {orderedItem.get('name')} {orderActions}
-            </OrderItemName>
+            <OrderItemName>{orderedItem.get('name')}</OrderItemName>
             <OrderItemOptions>
                 {orderedItem.get('options').map(getOrderedItemOptionSection)}
             </OrderItemOptions>
@@ -61,6 +79,7 @@ const LatestOrder = ({
     addOrder,
     closeAndSettle,
     closingAndSettling,
+    removeItem,
     hasOrdered,
     isOrdering,
     items,
@@ -70,6 +89,7 @@ const LatestOrder = ({
     if (!order) return <LoadingSplash />
     const isCurrentUserHost =
         order.getIn(['host', 'googleId']) === currentUser.get('googleId')
+    const orderId = order.get('id')
     const currentUserId = currentUser.get('googleId')
     const hasOrderShipped = order.getIn(['details', 'orderedAt']) !== null
     let addToOrderForm
@@ -115,6 +135,8 @@ const LatestOrder = ({
                         index,
                         hasOrderShipped,
                         currentUserId,
+                        removeItem,
+                        orderId,
                     ),
                 )}
             {addToOrderForm}
@@ -128,6 +150,7 @@ LatestOrder.propTypes = {
     addOrder: PropTypes.func.isRequired,
     closeAndSettle: PropTypes.func.isRequired,
     closingAndSettling: PropTypes.bool,
+    removeItem: PropTypes.func.isRequired,
     hasOrdered: PropTypes.bool,
     isOrdering: PropTypes.bool,
     items: PropTypes.object,
