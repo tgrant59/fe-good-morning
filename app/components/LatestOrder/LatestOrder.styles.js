@@ -66,3 +66,7 @@ export const OrderItemOptionSection = styled.div`
 export const OrderShippedSection = styled.div`
     margin: 48px auto 24px;
 `
+
+export const AddOrderHeader = styled.h1`
+    margin-top: 30px !important;
+`

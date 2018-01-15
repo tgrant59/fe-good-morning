@@ -12,10 +12,10 @@ export const selectOrder = createSelector(
         let latestOrder = orderState.get('latestOrder')
         if (!latestOrder) return null
         const hostId = latestOrder.getIn(['details', 'ownerId'])
-        latestOrder = latestOrder.set(
-            'host',
-            usersState.getIn(['users', hostId]),
-        )
+        const user = usersState.getIn(['users', hostId])
+        if (user) {
+            latestOrder = latestOrder.set('host', user.set('googleId', hostId))
+        }
         const orderedItems = latestOrder
             .get('orderedItems')
             .map(orderedItem =>

@@ -5,6 +5,7 @@ import LoadingSplash from 'components/LoadingSplash'
 
 import AddOrderForm from './AddOrderForm'
 import {
+    AddOrderHeader,
     LatestOrderContainer,
     OrderCard,
     OrderCardHeader,
@@ -58,19 +59,19 @@ const LatestOrder = ({
 }) => {
     if (!order) return <LoadingSplash />
     const isCurrentUserHost =
-        order.getIn(['host', 'id']) === currentUser.get('id')
+        order.getIn(['host', 'googleId']) === currentUser.get('googleId')
     const hasOrderShipped = order.getIn(['details', 'orderedAt']) !== null
     let addToOrderForm
     if (hasOrderShipped) {
         addToOrderForm = (
             <OrderShippedSection>
-                Todays order has finished, there is always next time! 🍌
+                Todays order has finished, there&#8217;s always tomorrow! 🍌
             </OrderShippedSection>
         )
     } else {
         addToOrderForm = (
             <div>
-                <h1>Add to Order</h1>
+                <AddOrderHeader>Add to Order</AddOrderHeader>
                 <AddOrderForm
                     hasOrdered={hasOrdered}
                     isOrdering={isOrdering}
