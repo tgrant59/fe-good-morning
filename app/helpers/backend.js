@@ -3,9 +3,9 @@ import { requestGenerator } from 'helpers/request'
 const apiUrl = () => {
     if (process.env.NODE_ENV === 'production') {
         return 'https://ed61tixexb.execute-api.us-east-1.amazonaws.com/prod'
-    } else {
-        return 'https://ed61tixexb.execute-api.us-east-1.amazonaws.com/stage'
     }
+
+    return 'https://qd6vum00vf.execute-api.us-east-1.amazonaws.com/stage'
 }
 
 const API_URL = apiUrl()
