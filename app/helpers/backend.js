@@ -6,7 +6,7 @@ const apiUrl = () => {
     }
 
     return 'https://qd6vum00vf.execute-api.us-east-1.amazonaws.com/stage'
-    //return 'http://localhost:3000'
+    // return 'http://localhost:3000'
 }
 
 const API_URL = apiUrl()
