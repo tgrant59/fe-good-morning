@@ -12,6 +12,7 @@ import NavBar from 'components/NavBar'
 import MadeWithLove from 'components/MadeWithLove'
 import Orders from 'containers/OrdersPage/Loadable'
 import Ledgers from 'containers/LedgersPage/Loadable'
+import Ladder from 'containers/LadderPage/Loadable'
 import routes from 'routes'
 import { colors } from 'styles'
 import injectSaga from '../../utils/injectSaga'
@@ -71,6 +72,11 @@ export class LoggedInView extends React.PureComponent {
                             exact
                             path={routes.LEDGERS}
                             component={Ledgers}
+                        />
+                        <Route
+                            exact
+                            path={routes.LADDER}
+                            component={Ladder}
                         />
                     </Switch>
                     <Footer />

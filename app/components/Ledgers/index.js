@@ -39,6 +39,16 @@ const getLedger = (ledger, index) => {
 
 const Ledgers = ({ ledgers }) => {
     if (!ledgers) return <LoadingSplash />
+    if (ledgers.size === 0) {
+        return (
+            <LedgersContainer>
+                {`You don't yet owe anyone!`}
+                <br />
+                {`Ledgers will appear here after you've had your first order.`}
+                <br />
+            </LedgersContainer>
+        )
+    }
     return (
         <LedgersContainer>
             {ledgers.map((ledgerItem, index) => getLedger(ledgerItem, index))}

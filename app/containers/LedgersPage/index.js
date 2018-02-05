@@ -18,7 +18,7 @@ const Container = styled.div`
     width: 100%;
 `
 
-export class Orders extends React.PureComponent {
+export class LedgersPage extends React.PureComponent {
     static propTypes = {
         loadLedgers: PropTypes.func.isRequired,
         ledgers: PropTypes.object,
@@ -55,4 +55,4 @@ const withState = compose(
     injectSaga({ key: 'ledgers', saga: ledgersSaga }),
 )
 
-export default withState(Orders)
+export default withState(LedgersPage)
