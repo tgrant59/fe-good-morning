@@ -196,8 +196,10 @@ class AddOrderForm extends React.Component {
                     </select>
                     <AddOptionSections>
                         {this.state.selectedItem
-                            .get('options')
-                            .map(this.getOption)}
+                            ? this.state.selectedItem
+                                  .get('options')
+                                  .map(this.getOption)
+                            : null}
                     </AddOptionSections>
                     <AddButton type="submit">Place Order</AddButton>
                 </form>
