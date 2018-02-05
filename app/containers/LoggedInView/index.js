@@ -73,11 +73,7 @@ export class LoggedInView extends React.PureComponent {
                             path={routes.LEDGERS}
                             component={Ledgers}
                         />
-                        <Route
-                            exact
-                            path={routes.LADDER}
-                            component={Ladder}
-                        />
+                        <Route exact path={routes.LADDER} component={Ladder} />
                     </Switch>
                     <Footer />
                     <MadeWithLove />
