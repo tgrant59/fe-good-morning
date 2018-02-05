@@ -24,7 +24,7 @@ const getLadder = (ladderItem, index) => {
     } else if (amount < 0) {
         text = `${userName} is keeping the boat afloat`
     } else if (amount > 0) {
-        text = `${userName} owes everyone`
+        text = `${userName} owes`
     }
 
     if (amount < 0) {
@@ -37,7 +37,9 @@ const getLadder = (ladderItem, index) => {
             <LadderCardHeader>
                 <LadderImg src={user.get('picture')} />
                 <LadderText>{text}</LadderText>
-                <LadderAmmount>{`$${amount}`}</LadderAmmount>
+                <LadderAmmount>
+                    {amount === 0 ? `$$$` : `$${amount}`}
+                </LadderAmmount>
             </LadderCardHeader>
         </LadderCard>
     )
