@@ -66,7 +66,7 @@ class OrderDetails extends React.Component {
                     disabled={closingAndSettling}
                     onClick={this.closeAndSettle}
                 >
-                    <i className="fas fa-trophy" />&nbsp; Close and Settle
+                    <i className="fas fa-trophy" />&nbsp; Close &amp; Order
                 </CloseAndSettleButton>
             )
         }
@@ -128,7 +128,7 @@ class OrderDetails extends React.Component {
         }
 
         return isCurrentUserHost
-            ? `You are hosting this order. When you've ordered, click 'Close and Settle' to close the order and settle the ledger`
+            ? `You are hosting this order. Click 'Close & Order' to send the order to Pot Belly's (and they'll have it ready in 30 minutes)`
             : `${hostName} is hosting this order`
     }
 

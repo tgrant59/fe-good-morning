@@ -5,7 +5,8 @@ const apiUrl = () => {
         return 'https://ed61tixexb.execute-api.us-east-1.amazonaws.com/prod'
     }
 
-    return 'https://qd6vum00vf.execute-api.us-east-1.amazonaws.com/stage'
+    // return 'https://qd6vum00vf.execute-api.us-east-1.amazonaws.com/stage'
+    return `https://pizp5gwega.execute-api.us-east-1.amazonaws.com/stage`
     // return 'http://localhost:3000'
 }
 
