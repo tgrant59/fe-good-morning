@@ -128,7 +128,7 @@ class OrderDetails extends React.Component {
         }
 
         return isCurrentUserHost
-            ? `You are hosting this order. Click 'Close & Order' to send the order to Pot Belly's (and they'll have it ready in 30 minutes)`
+            ? `You are hosting this order. Click 'Close & Order' to send the order to Pot Belly's (and they'll have it ready in 45 minutes). You will recieve updates via email. If you don't hear recieve an email reply from pot bellys in 10 minutes, please call them (see email for details).`
             : `${hostName} is hosting this order`
     }
 
