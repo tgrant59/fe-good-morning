@@ -16,7 +16,9 @@ const getLadder = (ladderItem, index) => {
     const user = ladderItem.get('user')
     if (!user) return null
     const userName = user.get('name')
-    let amount = parseFloat(ladderItem.get('amount'), 10)
+    const ammountRaw = ladderItem.get('amount')
+    const ammountRawWithTax = ammountRaw * 1.13
+    let amount = parseFloat(ammountRawWithTax, 10)
 
     let text = ''
     if (amount === 0) {
