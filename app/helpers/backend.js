@@ -2,12 +2,10 @@ import { requestGenerator } from 'helpers/request'
 
 const apiUrl = () => {
     if (process.env.NODE_ENV === 'production') {
-        return 'https://hbgtd0n1n0.execute-api.us-east-1.amazonaws.com/stage'
+        return 'https://ed61tixexb.execute-api.us-east-1.amazonaws.com/prod'
     }
 
-    // return 'https://qd6vum00vf.execute-api.us-east-1.amazonaws.com/stage'
-    return `https://pizp5gwega.execute-api.us-east-1.amazonaws.com/stage`
-    // return 'http://localhost:3000'
+    return 'http://localhost:3000'
 }
 
 const API_URL = apiUrl()
