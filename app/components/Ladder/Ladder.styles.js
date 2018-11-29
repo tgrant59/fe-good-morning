@@ -28,6 +28,12 @@ export const LadderText = styled.span`
     font-size: 18px;
     margin-left: 60px;
 `
+export const LadderTextSub = styled.span`
+    flex: 3;
+    text-align: left;
+    font-size: 14px;
+    margin-left: 24px;
+`
 export const LadderAmmount = styled.span`
     text-align: right;
     flex: 1;

@@ -9,6 +9,7 @@ import {
     LadderCardHeader,
     LadderImg,
     LadderText,
+    LadderTextSub,
     LadderAmmount,
 } from './Ladder.styles'
 
@@ -16,6 +17,7 @@ const getLadder = (ladderItem, index) => {
     const user = ladderItem.get('user')
     if (!user) return null
     const userName = user.get('name')
+    const userRealName = user.get('realName')
     const ammountRaw = ladderItem.get('amount')
     const ammountRawWithTax = ammountRaw * 1.13
     let amount = parseFloat(ammountRawWithTax, 10)
@@ -39,6 +41,7 @@ const getLadder = (ladderItem, index) => {
             <LadderCardHeader>
                 <LadderImg src={user.get('picture')} />
                 <LadderText>{text}</LadderText>
+                <LadderTextSub>{userRealName}</LadderTextSub>
                 <LadderAmmount>
                     {amount === 0 ? `$$$` : `$${amount}`}
                 </LadderAmmount>
