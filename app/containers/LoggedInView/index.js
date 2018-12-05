@@ -65,7 +65,7 @@ export class LoggedInView extends React.PureComponent {
                 <NavBar user={this.props.userFromOurDB} />
                 <MainContainer>
                     <Switch>
-                        <Route exact path={routes.LADDER} component={Ladder} />
+                        <Route component={Ladder} />
                     </Switch>
                     <Footer />
                     <MadeWithLove />
