@@ -10,8 +10,6 @@ import { loadUsers } from 'ducks/Users/Users.actions'
 
 import NavBar from 'components/NavBar'
 import MadeWithLove from 'components/MadeWithLove'
-import Orders from 'containers/OrdersPage/Loadable'
-import Ledgers from 'containers/LedgersPage/Loadable'
 import Ladder from 'containers/LadderPage/Loadable'
 import routes from 'routes'
 import { colors } from 'styles'
